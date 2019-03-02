@@ -1,0 +1,22 @@
+﻿<Controls:MetroWindow x:Name="managerWindow" x:Class="DormRanNew.Manager"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DormRanNew"
+        mc:Ignorable="d"
+        Title="数据库管理" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/logo.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Name="btnManageOfficer" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnManageOfficer_Click" Content="人员管理" FontFamily="宋体" FontSize="26"/>
+        <Button Name="btnManageDorm" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnManageDorm_Click" Content="楼栋管理" FontFamily="宋体" FontSize="26" />
+    </Grid>
+</Controls:MetroWindow>

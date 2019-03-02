@@ -16,7 +16,7 @@ namespace DormRanNew
     {
         public string term { get; set; }
         public int check_id { get; set; }
-        public string area { get; set; }
+        public Nullable<int> area { get; set; }
         public string dorm_name { get; set; }
         public string floor_id { get; set; }
         public Nullable<System.DateTime> insert_date { get; set; }

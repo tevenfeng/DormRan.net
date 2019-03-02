@@ -10,8 +10,8 @@
             <PropertyRef Name="area" />
             <PropertyRef Name="dorm_name" />
           </Key>
-          <Property Name="area" Type="enum" Nullable="false" />
-          <Property Name="group_id" Type="enum" />
+          <Property Name="area" Type="int" Nullable="false" />
+          <Property Name="group_id" Type="int" />
           <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="floor_number" Type="int" />
           <Property Name="gender" Type="enum" />
@@ -24,14 +24,23 @@
           </Key>
           <Property Name="term" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="check_id" Type="int" Nullable="false" />
-          <Property Name="area" Type="enum" />
+          <Property Name="area" Type="int" />
           <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="floor_id" Type="varchar" MaxLength="255" />
           <Property Name="insert_date" Type="date" />
         </EntityType>
+        <EntityType Name="officer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+            <PropertyRef Name="officer_name" />
+          </Key>
+          <Property Name="officer_id" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="officer_name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="check_dorm_newModelStoreContainer">
           <EntitySet Name="dorm" EntityType="Self.dorm" Schema="check_dorm_new" store:Type="Tables" />
           <EntitySet Name="history" EntityType="Self.history" Schema="check_dorm_new" store:Type="Tables" />
+          <EntitySet Name="officer" EntityType="Self.officer" Schema="check_dorm_new" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -43,8 +52,8 @@
             <PropertyRef Name="area" />
             <PropertyRef Name="dorm_name" />
           </Key>
-          <Property Name="area" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="group_id" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="Int32" Nullable="false" />
+          <Property Name="group_id" Type="Int32" />
           <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="floor_number" Type="Int32" />
           <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
@@ -57,14 +66,23 @@
           </Key>
           <Property Name="term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="check_id" Type="Int32" Nullable="false" />
-          <Property Name="area" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="Int32" />
           <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="floor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="insert_date" Type="DateTime" />
         </EntityType>
+        <EntityType Name="officer">
+          <Key>
+            <PropertyRef Name="officer_id" />
+            <PropertyRef Name="officer_name" />
+          </Key>
+          <Property Name="officer_id" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="officer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="check_dorm_newEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="dorm" EntityType="Self.dorm" />
           <EntitySet Name="history" EntityType="Self.history" />
+          <EntitySet Name="officer" EntityType="Self.officer" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -92,6 +110,14 @@
                 <ScalarProperty Name="dorm_name" ColumnName="dorm_name" />
                 <ScalarProperty Name="floor_id" ColumnName="floor_id" />
                 <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="officer">
+            <EntityTypeMapping TypeName="check_dorm_newModel.officer">
+              <MappingFragment StoreEntitySet="officer">
+                <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+                <ScalarProperty Name="officer_name" ColumnName="officer_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

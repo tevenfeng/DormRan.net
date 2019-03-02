@@ -12,12 +12,9 @@ namespace DormRanNew
     using System;
     using System.Collections.Generic;
     
-    public partial class dorm
+    public partial class officer
     {
-        public int area { get; set; }
-        public Nullable<int> group_id { get; set; }
-        public string dorm_name { get; set; }
-        public Nullable<int> floor_number { get; set; }
-        public string gender { get; set; }
+        public string officer_id { get; set; }
+        public string officer_name { get; set; }
     }
 }
