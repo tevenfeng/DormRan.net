@@ -14,6 +14,7 @@ namespace DormRanNew
     
     public partial class officer
     {
+        public int row_id { get; set; }
         public string officer_id { get; set; }
         public string officer_name { get; set; }
     }

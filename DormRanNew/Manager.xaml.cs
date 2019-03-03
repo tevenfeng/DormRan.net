@@ -20,27 +20,21 @@ namespace DormRanNew
     /// </summary>
     public partial class Manager : MetroWindow
     {
-        /// <summary>
-        /// 数据库连接
-        /// </summary>
-        private check_dorm_newEntities db;
-
-        public Manager(check_dorm_newEntities db)
+        public Manager()
         {
-            this.db = db;
             InitializeComponent();
         }
 
         private void btnManageOfficer_Click(object sender, RoutedEventArgs e)
         {
-            Editor officerEditor = new Editor(true, this.db);
+            Editor officerEditor = new Editor(true);
             officerEditor.Owner = this;
             officerEditor.ShowDialog();
         }
 
         private void btnManageDorm_Click(object sender, RoutedEventArgs e)
         {
-            Editor dormEditor = new Editor(false, this.db);
+            Editor dormEditor = new Editor(false);
             dormEditor.Owner = this;
             dormEditor.ShowDialog();
         }

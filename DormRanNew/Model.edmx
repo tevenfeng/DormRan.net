@@ -7,33 +7,32 @@
       <Schema Namespace="check_dorm_newModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dorm">
           <Key>
-            <PropertyRef Name="area" />
-            <PropertyRef Name="dorm_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="area" Type="int" Nullable="false" />
-          <Property Name="group_id" Type="int" />
-          <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="dorm_name" Type="varchar" MaxLength="255" />
           <Property Name="floor_number" Type="int" />
           <Property Name="gender" Type="enum" />
         </EntityType>
         <EntityType Name="history">
           <Key>
-            <PropertyRef Name="term" />
-            <PropertyRef Name="check_id" />
-            <PropertyRef Name="dorm_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="term" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="check_id" Type="int" Nullable="false" />
-          <Property Name="area" Type="int" />
-          <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="area" Type="int" Nullable="false" />
+          <Property Name="dorm_name" Type="varchar" MaxLength="255" />
           <Property Name="floor_id" Type="varchar" MaxLength="255" />
           <Property Name="insert_date" Type="date" />
         </EntityType>
         <EntityType Name="officer">
           <Key>
-            <PropertyRef Name="officer_id" />
-            <PropertyRef Name="officer_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="officer_id" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="officer_name" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -49,33 +48,32 @@
       <Schema Namespace="check_dorm_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="dorm">
           <Key>
-            <PropertyRef Name="area" />
-            <PropertyRef Name="dorm_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="area" Type="Int32" Nullable="false" />
-          <Property Name="group_id" Type="Int32" />
-          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="floor_number" Type="Int32" />
           <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="history">
           <Key>
-            <PropertyRef Name="term" />
-            <PropertyRef Name="check_id" />
-            <PropertyRef Name="dorm_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="check_id" Type="Int32" Nullable="false" />
-          <Property Name="area" Type="Int32" />
-          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="area" Type="Int32" Nullable="false" />
+          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="floor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="insert_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="officer">
           <Key>
-            <PropertyRef Name="officer_id" />
-            <PropertyRef Name="officer_name" />
+            <PropertyRef Name="row_id" />
           </Key>
+          <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="officer_id" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="officer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
@@ -93,6 +91,7 @@
           <EntitySetMapping Name="dorm">
             <EntityTypeMapping TypeName="check_dorm_newModel.dorm">
               <MappingFragment StoreEntitySet="dorm">
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="group_id" ColumnName="group_id" />
                 <ScalarProperty Name="dorm_name" ColumnName="dorm_name" />
@@ -104,6 +103,7 @@
           <EntitySetMapping Name="history">
             <EntityTypeMapping TypeName="check_dorm_newModel.history">
               <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="term" ColumnName="term" />
                 <ScalarProperty Name="check_id" ColumnName="check_id" />
                 <ScalarProperty Name="area" ColumnName="area" />
@@ -116,6 +116,7 @@
           <EntitySetMapping Name="officer">
             <EntityTypeMapping TypeName="check_dorm_newModel.officer">
               <MappingFragment StoreEntitySet="officer">
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="officer_id" ColumnName="officer_id" />
                 <ScalarProperty Name="officer_name" ColumnName="officer_name" />
               </MappingFragment>

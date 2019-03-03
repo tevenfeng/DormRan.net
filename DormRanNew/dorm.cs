@@ -14,8 +14,9 @@ namespace DormRanNew
     
     public partial class dorm
     {
+        public int row_id { get; set; }
         public int area { get; set; }
-        public Nullable<int> group_id { get; set; }
+        public int group_id { get; set; }
         public string dorm_name { get; set; }
         public Nullable<int> floor_number { get; set; }
         public string gender { get; set; }

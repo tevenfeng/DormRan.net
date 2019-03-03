@@ -23,34 +23,26 @@
         </Grid.ColumnDefinitions>
         
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="officeGrid" ItemsSource="{Binding}"
-                  AutoGenerateColumns="False" Visibility="Hidden" >
+                  AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="officeGrid_RowEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="工号/学号" Width="*" Binding="{Binding officer_id}" />
-                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name}" />
+                <DataGridTextColumn Header="工号/学号" Width="*" Binding="{Binding officer_id, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="dormGrid" ItemsSource="{Binding}"
-                  AutoGenerateColumns="False" Visibility="Hidden" >
+                  AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="dormGrid_RowEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="检查区域" Width="*" Binding="{Binding area}" />
-                <DataGridTextColumn Header="分组" Width="*" Binding="{Binding group_id}" />
-                <DataGridTextColumn Header="楼栋名称" Width="4*" Binding="{Binding dorm_name}" />
-                <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number}" />
-                <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender}"/>
+                <DataGridTextColumn Header="检查区域" Width="2*" Binding="{Binding area, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="分组" Width="*" Binding="{Binding group_id, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="楼栋名称" Width="3*" Binding="{Binding dorm_name, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Name="btnAddNewRecord" Grid.Row="1" Grid.Column="0" Content="添加"
-                FontFamily="宋体" FontSize="30" Click="btnAddNewRecord_Click" 
-                VerticalAlignment="Center" HorizontalAlignment="Center" />
-
         <Button Name="btnRemoveRecord" Grid.Row="1" Grid.Column="1" Content="删除"
                 FontFamily="宋体" FontSize="30" Click="btnRemoveRecord_Click"
-                VerticalAlignment="Center" HorizontalAlignment="Center" />
-
-        <Button Name="btnSaveRecords" Grid.Row="1" Grid.Column="2" Content="保存"
-                FontFamily="宋体" FontSize="30" Click="btnSaveRecords_Click"
                 VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </Controls:MetroWindow>
