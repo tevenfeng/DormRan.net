@@ -15,8 +15,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Name="btnManageOfficer" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnManageOfficer_Click" Content="人员管理" FontFamily="宋体" FontSize="26"/>
         <Button Name="btnManageDorm" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnManageDorm_Click" Content="楼栋管理" FontFamily="宋体" FontSize="26" />
+        <Button Name="btnQueryHistory" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="历史记录" FontFamily="宋体" FontSize="26" Click="btnQueryHistory_Click" />
     </Grid>
 </Controls:MetroWindow>

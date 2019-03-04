@@ -27,15 +27,17 @@ namespace DormRanNew
         /// 用于判断当前编辑器是管理人员还是楼栋的数据
         /// true代表人员，false代表楼栋
         /// </summary>
-        private bool isOfficerEditor;
+        private Management management;
 
         private ObservableCollection<officer> officers;
 
         private ObservableCollection<dorm> dorms;
 
-        public Editor(bool isManagingOfficer)
+        private ObservableCollection<history> histories;
+
+        public Editor(Management management)
         {
-            this.isOfficerEditor = isManagingOfficer;
+            this.management = management;
 
             InitializeComponent();
         }
@@ -45,26 +47,35 @@ namespace DormRanNew
             using (check_dorm_newEntities db = new check_dorm_newEntities())
             {
                 // 读取已有数据
-                if (this.isOfficerEditor)
+                if (this.management == Management.人员)
                 {
                     this.Title = "人员管理";
                     this.officeGrid.Visibility = Visibility.Visible;
                     this.officers = new ObservableCollection<officer>(db.officer.ToList());
                     this.officeGrid.DataContext = this.officers;
                 }
-                else
+                else if (this.management == Management.楼栋)
                 {
                     this.Title = "楼栋管理";
                     this.dormGrid.Visibility = Visibility.Visible;
                     this.dorms = new ObservableCollection<dorm>(db.dorm.ToList());
                     this.dormGrid.DataContext = this.dorms;
                 }
+                else if (this.management == Management.历史)
+                {
+                    this.Title = "历史记录查询";
+                    this.historyGrid.Visibility = Visibility.Visible;
+                    this.btnRemoveRecord.IsEnabled = false;
+                    this.btnRemoveRecord.Visibility = Visibility.Hidden;
+                    this.histories = new ObservableCollection<history>(db.history.ToList());
+                    this.historyGrid.DataContext = this.histories;
+                }
             }
         }
 
         private async void btnRemoveRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (this.isOfficerEditor)
+            if (this.management==Management.人员)
             {
                 // 删除的是人员数据
                 officer tmpOfficer = (officer)this.officeGrid.SelectedItem;
@@ -74,7 +85,7 @@ namespace DormRanNew
                     if (result != MessageDialogResult.Negative)
                     {
                         // 删除
-                        db.officer.Remove(db.officer.Where(p=>p.row_id.Equals(tmpOfficer.row_id)).First());
+                        db.officer.Remove(db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First());
                         db.SaveChanges();
                         this.officers.Remove(tmpOfficer);
                         this.officeGrid.ItemsSource = null;
@@ -82,7 +93,7 @@ namespace DormRanNew
                     }
                 }
             }
-            else
+            else if (this.management==Management.楼栋)
             {
                 // 删除的是楼栋数据
                 dorm tmpDorm = (dorm)this.dormGrid.SelectedItem;
@@ -92,7 +103,7 @@ namespace DormRanNew
                     if (result != MessageDialogResult.Negative)
                     {
                         // 删除
-                        db.dorm.Remove(db.dorm.Where(p=>p.dorm_name.Equals(tmpDorm.dorm_name)).First());
+                        db.dorm.Remove(db.dorm.Where(p => p.dorm_name.Equals(tmpDorm.dorm_name)).First());
                         db.SaveChanges();
                         this.dorms.Remove(tmpDorm);
                         this.dormGrid.ItemsSource = null;

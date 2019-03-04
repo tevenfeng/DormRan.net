@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:DormRanNew"
         mc:Ignorable="d"
         Title="管理" Height="500" Width="500" Loaded="editorWindow_Loaded" 
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        WindowStartupLocation="CenterOwner">
 
 
     <Grid>
@@ -21,7 +21,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="officeGrid" ItemsSource="{Binding}"
                   AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="officeGrid_RowEditEnding" >
             <DataGrid.Columns>
@@ -38,6 +38,18 @@
                 <DataGridTextColumn Header="楼栋名称" Width="3*" Binding="{Binding dorm_name, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="historyGrid" ItemsSource="{Binding}"
+                  AutoGenerateColumns="False" Visibility="Hidden" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="学期" Width="*" Binding="{Binding term}" />
+                <DataGridTextColumn Header="检查编号" Width="*" Binding="{Binding check_id}" />
+                <DataGridTextColumn Header="区域" Width="*" Binding="{Binding area}" />
+                <DataGridTextColumn Header="宿舍楼栋" Width="*" Binding="{Binding dorm_name}" />
+                <DataGridTextColumn Header="宿舍层" Width="*" Binding="{Binding floor_id}" />
+                <DataGridTextColumn Header="插入日期" Width="*" Binding="{Binding insert_date}" />
             </DataGrid.Columns>
         </DataGrid>
 

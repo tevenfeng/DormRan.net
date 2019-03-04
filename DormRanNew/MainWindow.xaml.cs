@@ -17,6 +17,8 @@ using MahApps.Metro.Controls;
 
 namespace DormRanNew
 {
+    public enum Management { 人员, 楼栋, 历史 };
+
     public class Result
     {
         public string dormName { get; set; }
@@ -232,6 +234,14 @@ namespace DormRanNew
             getDormsSelected(this.areas[this.rd.Next(0, this.areas.Count)], out this.dormsGroup1, 
                 out this.dormsGroup2, out this.dormsGroup3);
 
+            this.dataGridGroupOne.ItemsSource = null;
+            this.dataGridGroupTwo.ItemsSource = null;
+            this.dataGridGroupThree.ItemsSource = null;
+
+            this.dormsShow1.Clear();
+            this.dormsShow2.Clear();
+            this.dormsShow3.Clear();
+
             this.btnStartSampling.IsEnabled = false;
             this.timer1.Start();
             this.timer2.Start();
@@ -380,11 +390,14 @@ namespace DormRanNew
                 string floorsSelected = "";
                 string floorsOfDorm = "";
 
-                foreach (string floor in floors)
+                for (int i = 0; i < floors.Count - 1; i++)
                 {
-                    floorsOfDorm += floor + "层  ";
-                    floorsSelected += floor + " ";
+                    floorsOfDorm += floors[i] + "层  ";
+                    floorsSelected += floors[i] + " ";
                 }
+
+                floorsOfDorm += floors[floors.Count-1] + "层";
+                floorsSelected += floors[floors.Count-1];
 
                 this.samplingDormLabel.Content = firstDorm.dorm_name;
                 this.samplingFloorLabel.Content = floorsOfDorm;
@@ -541,7 +554,8 @@ namespace DormRanNew
                     floors.Add(i);
                 }
 
-                List<int> lastTermFloors = new List<int>(Array.ConvertAll(lastHistories[0].floor_id.Split(' '), int.Parse));
+                string[] tmp = lastHistories[0].floor_id.Split(' ');
+                List<int> lastTermFloors = new List<int>(Array.ConvertAll(tmp, int.Parse));
 
                 floors = floors.Except(lastTermFloors).ToList();
             }
@@ -578,8 +592,6 @@ namespace DormRanNew
             }
             this.db.SaveChanges();
         }
-
-
 
         private void btnStartSamplingGroup_Click(object sender, RoutedEventArgs e)
         {

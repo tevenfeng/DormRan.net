@@ -27,16 +27,23 @@ namespace DormRanNew
 
         private void btnManageOfficer_Click(object sender, RoutedEventArgs e)
         {
-            Editor officerEditor = new Editor(true);
+            Editor officerEditor = new Editor(Management.人员);
             officerEditor.Owner = this;
             officerEditor.ShowDialog();
         }
 
         private void btnManageDorm_Click(object sender, RoutedEventArgs e)
         {
-            Editor dormEditor = new Editor(false);
+            Editor dormEditor = new Editor(Management.楼栋);
             dormEditor.Owner = this;
             dormEditor.ShowDialog();
+        }
+
+        private void btnQueryHistory_Click(object sender, RoutedEventArgs e)
+        {
+            Editor historyEditor = new Editor(Management.历史);
+            historyEditor.Owner = this;
+            historyEditor.ShowDialog();
         }
     }
 }
