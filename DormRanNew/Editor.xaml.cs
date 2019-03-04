@@ -18,6 +18,43 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace DormRanNew
 {
+    public class OfficerValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value,
+            System.Globalization.CultureInfo cultureInfo)
+        {
+            officer tmpOfficer = (value as BindingGroup).Items[0] as officer;
+            if (tmpOfficer.officer_id == null || tmpOfficer.officer_name == null)
+            {
+                return new ValidationResult(false,
+                    "所有项目都是必填项！");
+            }
+            else
+            {
+                return ValidationResult.ValidResult;
+            }
+        }
+    }
+
+    public class DormValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value,
+            System.Globalization.CultureInfo cultureInfo)
+        {
+            dorm tmpDorm = (value as BindingGroup).Items[0] as dorm;
+            if (tmpDorm.area < 5 && tmpDorm.area > 0 && tmpDorm.dorm_name != null
+                && tmpDorm.group_id > 0 && tmpDorm.group_id < 4
+                && (tmpDorm.gender == "男" || tmpDorm.gender == "女"))
+            {
+                return ValidationResult.ValidResult;
+            }
+            else
+            {
+                return new ValidationResult(false, "所有项目都是必填项！");
+            }
+        }
+    }
+
     /// <summary>
     /// Editor.xaml 的交互逻辑
     /// </summary>
@@ -75,7 +112,7 @@ namespace DormRanNew
 
         private async void btnRemoveRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (this.management==Management.人员)
+            if (this.management == Management.人员)
             {
                 // 删除的是人员数据
                 officer tmpOfficer = (officer)this.officeGrid.SelectedItem;
@@ -93,7 +130,7 @@ namespace DormRanNew
                     }
                 }
             }
-            else if (this.management==Management.楼栋)
+            else if (this.management == Management.楼栋)
             {
                 // 删除的是楼栋数据
                 dorm tmpDorm = (dorm)this.dormGrid.SelectedItem;

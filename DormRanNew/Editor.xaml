@@ -7,13 +7,14 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:DormRanNew"
         mc:Ignorable="d"
-        Title="管理" Height="500" Width="500" Loaded="editorWindow_Loaded" 
+        Title="管理" Height="550" Width="500" Loaded="editorWindow_Loaded" 
         WindowStartupLocation="CenterOwner">
 
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="18*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,20 +26,28 @@
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="officeGrid" ItemsSource="{Binding}"
                   AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="officeGrid_RowEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="工号/学号" Width="*" Binding="{Binding officer_id, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="工号/学号" Width="*" Binding="{Binding officer_id, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
+
+            <DataGrid.RowValidationRules>
+                <local:OfficerValidationRule ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
         </DataGrid>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="dormGrid" ItemsSource="{Binding}"
                   AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="dormGrid_RowEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="检查区域" Width="2*" Binding="{Binding area, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="分组" Width="*" Binding="{Binding group_id, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="楼栋名称" Width="3*" Binding="{Binding dorm_name, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="检查区域" Width="2*" Binding="{Binding area, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="分组" Width="*" Binding="{Binding group_id, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="楼栋名称" Width="3*" Binding="{Binding dorm_name, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
+
+            <DataGrid.RowValidationRules>
+                <local:DormValidationRule ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
         </DataGrid>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="historyGrid" ItemsSource="{Binding}"
@@ -56,5 +65,9 @@
         <Button Name="btnRemoveRecord" Grid.Row="1" Grid.Column="1" Content="删除"
                 FontFamily="宋体" FontSize="30" Click="btnRemoveRecord_Click"
                 VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <StatusBar Name="statusBar" Grid.Row="2" Grid.ColumnSpan="3">
+            <TextBlock Name="helpTextBlock" Text="双击编辑；连按两次ESC取消编辑；回车保存" FontFamily="宋体" Foreground="Black" />
+        </StatusBar>
     </Grid>
 </Controls:MetroWindow>
