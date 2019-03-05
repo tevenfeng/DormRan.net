@@ -31,10 +31,6 @@
                 <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="性别" Width="*" Binding="{Binding officer_gender, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
-
-            <DataGrid.RowValidationRules>
-                <local:OfficerValidationRule ValidationStep="UpdatedValue"/>
-            </DataGrid.RowValidationRules>
         </DataGrid>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="dormGrid" ItemsSource="{Binding}"
@@ -46,10 +42,6 @@
                 <DataGridTextColumn Header="楼层数" Width="*" Binding="{Binding floor_number, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="性别" Width="*" Binding ="{Binding gender, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
-
-            <DataGrid.RowValidationRules>
-                <local:DormValidationRule ValidationStep="UpdatedValue"/>
-            </DataGrid.RowValidationRules>
         </DataGrid>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="historyGrid" ItemsSource="{Binding}"
@@ -61,6 +53,16 @@
                 <DataGridTextColumn Header="宿舍楼栋" Width="*" Binding="{Binding dorm_name}" />
                 <DataGridTextColumn Header="宿舍层" Width="*" Binding="{Binding floor_id}" />
                 <DataGridTextColumn Header="插入日期" Width="*" Binding="{Binding insert_date}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="checkinGrid" ItemsSource="{Binding}"
+                  AutoGenerateColumns="False" Visibility="Hidden" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="学期" Width="*" Binding="{Binding term}" />
+                <DataGridTextColumn Header="工号" Width="*" Binding="{Binding officer_id}" />
+                <DataGridTextColumn Header="姓名" Width="2*" Binding="{Binding officer_name}" />
+                <DataGridTextColumn Header="插入日期" Width="2*" Binding="{Binding insert_date}" />
             </DataGrid.Columns>
         </DataGrid>
 

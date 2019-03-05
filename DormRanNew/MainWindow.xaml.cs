@@ -14,10 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace DormRanNew
 {
-    public enum Management { 人员, 楼栋, 历史 };
+    public enum Management { 人员, 楼栋, 历史, 签到 };
 
     public class Result
     {
@@ -126,7 +127,7 @@ namespace DormRanNew
         /// <summary>
         /// 存储当前学期
         /// </summary>
-        private string term;
+        public static string term;
 
         /// <summary>
         /// 存储记录中最新的学期
@@ -181,7 +182,7 @@ namespace DormRanNew
             this.dormsShow2 = new ObservableCollection<Result>();
             this.dormsShow3 = new ObservableCollection<Result>();
 
-            this.term = getTerm();
+            term = getTerm();
 
             if (myHistories.Count == 0)
             {
@@ -192,7 +193,7 @@ namespace DormRanNew
                 this.lastestTerm = myHistories.Last().term;
                 this.checkId = myHistories.Last().check_id;
 
-                if (this.term.Equals(this.lastestTerm))
+                if (term.Equals(this.lastestTerm))
                 {
                     if (this.checkId == checkTimes)
                     {
@@ -253,7 +254,7 @@ namespace DormRanNew
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSaveRecord_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveRecord_Click(object sender, RoutedEventArgs e)
         {
             this.checkId = (this.checkId % checkTimes) + 1;
             this.insertHistories(newHistories);
@@ -268,6 +269,8 @@ namespace DormRanNew
             {
                 this.checkIdText.Text = "第 " + checkId + " 次抽选";
             }
+
+            await this.ShowMessageAsync("", "保存成功！");
         }
 
         /// <summary>
@@ -299,7 +302,7 @@ namespace DormRanNew
         /// 获取当前学期，去年9月~今年1月为第一学期，今年3~8月为第二学期
         /// </summary>
         /// <returns></returns>
-        private string getTerm()
+        public string getTerm()
         {
             string nowTerm = "";
             int month = DateTime.Now.Month;
@@ -336,9 +339,9 @@ namespace DormRanNew
         {
             List<history> histories = new List<history>();
 
-            if (this.term.Last() == '2')
+            if (term.Last() == '2')
             {
-                string lastTerm = (int.Parse(this.term) - 1).ToString();
+                string lastTerm = (int.Parse(term) - 1).ToString();
                 histories = this.myHistories
                     .Where(p => p.term.Equals(lastTerm))
                     .ToList();
@@ -571,7 +574,7 @@ namespace DormRanNew
         private void AddNewHistory(dorm dormSelected, string floorsSelected)
         {
             history newHistory = new history();
-            newHistory.term = this.term;
+            newHistory.term = term;
             newHistory.area = dormSelected.area;
             newHistory.dorm_name = dormSelected.dorm_name;
             newHistory.check_id = this.checkId;
@@ -595,7 +598,9 @@ namespace DormRanNew
 
         private void btnStartSamplingGroup_Click(object sender, RoutedEventArgs e)
         {
-
+            Checkin checkinWindow = new Checkin();
+            checkinWindow.Owner = this;
+            checkinWindow.ShowDialog();
         }
 
         private void btnDatabaseManagement_Click(object sender, RoutedEventArgs e)

@@ -18,43 +18,6 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace DormRanNew
 {
-    public class OfficerValidationRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value,
-            System.Globalization.CultureInfo cultureInfo)
-        {
-            officer tmpOfficer = (value as BindingGroup).Items[0] as officer;
-            if (tmpOfficer.officer_id == null || tmpOfficer.officer_name == null)
-            {
-                return new ValidationResult(false,
-                    "所有项目都是必填项！");
-            }
-            else
-            {
-                return ValidationResult.ValidResult;
-            }
-        }
-    }
-
-    public class DormValidationRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value,
-            System.Globalization.CultureInfo cultureInfo)
-        {
-            dorm tmpDorm = (value as BindingGroup).Items[0] as dorm;
-            if (tmpDorm.area < 5 && tmpDorm.area > 0 && tmpDorm.dorm_name != null
-                && tmpDorm.group_id > 0 && tmpDorm.group_id < 4
-                && (tmpDorm.gender == "男" || tmpDorm.gender == "女"))
-            {
-                return ValidationResult.ValidResult;
-            }
-            else
-            {
-                return new ValidationResult(false, "所有项目都是必填项！");
-            }
-        }
-    }
-
     /// <summary>
     /// Editor.xaml 的交互逻辑
     /// </summary>
@@ -71,6 +34,8 @@ namespace DormRanNew
         private ObservableCollection<dorm> dorms;
 
         private ObservableCollection<history> histories;
+
+        private ObservableCollection<checkin_history> checkin_histories;
 
         public Editor(Management management)
         {
@@ -106,48 +71,63 @@ namespace DormRanNew
                     this.btnRemoveRecord.Visibility = Visibility.Hidden;
                     this.histories = new ObservableCollection<history>(db.history.ToList());
                     this.historyGrid.DataContext = this.histories;
+                    this.statusBar.Visibility = Visibility.Hidden;
+                }
+                else if (this.management == Management.签到)
+                {
+                    this.Title = "签到记录查询";
+                    this.checkinGrid.Visibility = Visibility.Visible;
+                    this.btnRemoveRecord.IsEnabled = false;
+                    this.btnRemoveRecord.Visibility = Visibility.Hidden;
+                    this.checkin_histories = new ObservableCollection<checkin_history>(db.checkin_history.ToList());
+                    this.checkinGrid.DataContext = this.checkin_histories;
+                    this.statusBar.Visibility = Visibility.Hidden;
                 }
             }
         }
 
         private async void btnRemoveRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (this.management == Management.人员)
+            try
             {
-                // 删除的是人员数据
-                officer tmpOfficer = (officer)this.officeGrid.SelectedItem;
-                using (check_dorm_newEntities db = new check_dorm_newEntities())
+                if (this.management == Management.人员)
                 {
-                    MessageDialogResult result = await this.ShowMessageAsync("人员管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
-                    if (result != MessageDialogResult.Negative)
+                    // 删除的是人员数据
+                    officer tmpOfficer = (officer)this.officeGrid.SelectedItem;
+                    using (check_dorm_newEntities db = new check_dorm_newEntities())
                     {
-                        // 删除
-                        db.officer.Remove(db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First());
-                        db.SaveChanges();
-                        this.officers.Remove(tmpOfficer);
-                        this.officeGrid.ItemsSource = null;
-                        this.officeGrid.ItemsSource = this.officers;
+                        MessageDialogResult result = await this.ShowMessageAsync("人员管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
+                        if (result != MessageDialogResult.Negative)
+                        {
+                            // 删除
+                            db.officer.Remove(db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First());
+                            db.SaveChanges();
+                            this.officers.Remove(tmpOfficer);
+                            this.officeGrid.ItemsSource = null;
+                            this.officeGrid.ItemsSource = this.officers;
+                        }
+                    }
+                }
+                else if (this.management == Management.楼栋)
+                {
+                    // 删除的是楼栋数据
+                    dorm tmpDorm = (dorm)this.dormGrid.SelectedItem;
+                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    {
+                        MessageDialogResult result = await this.ShowMessageAsync("楼栋管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
+                        if (result != MessageDialogResult.Negative)
+                        {
+                            // 删除
+                            db.dorm.Remove(db.dorm.Where(p => p.dorm_name.Equals(tmpDorm.dorm_name)).First());
+                            db.SaveChanges();
+                            this.dorms.Remove(tmpDorm);
+                            this.dormGrid.ItemsSource = null;
+                            this.dormGrid.ItemsSource = this.dorms;
+                        }
                     }
                 }
             }
-            else if (this.management == Management.楼栋)
-            {
-                // 删除的是楼栋数据
-                dorm tmpDorm = (dorm)this.dormGrid.SelectedItem;
-                using (check_dorm_newEntities db = new check_dorm_newEntities())
-                {
-                    MessageDialogResult result = await this.ShowMessageAsync("楼栋管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
-                    if (result != MessageDialogResult.Negative)
-                    {
-                        // 删除
-                        db.dorm.Remove(db.dorm.Where(p => p.dorm_name.Equals(tmpDorm.dorm_name)).First());
-                        db.SaveChanges();
-                        this.dorms.Remove(tmpDorm);
-                        this.dormGrid.ItemsSource = null;
-                        this.dormGrid.ItemsSource = this.dorms;
-                    }
-                }
-            }
+            catch (Exception exp) { }
         }
 
         private void officeGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)

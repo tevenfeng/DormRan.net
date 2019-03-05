@@ -45,5 +45,12 @@ namespace DormRanNew
             historyEditor.Owner = this;
             historyEditor.ShowDialog();
         }
+
+        private void btnCheckinHistory_Click(object sender, RoutedEventArgs e)
+        {
+            Editor checkinEditor = new Editor(Management.签到);
+            checkinEditor.Owner = this;
+            checkinEditor.ShowDialog();
+        }
     }
 }

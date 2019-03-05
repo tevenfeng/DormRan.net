@@ -36,7 +36,16 @@ create table history
     area  int not null,
     dorm_name  varchar(255) not null,
     floor_id  varchar(255) not null,  -- 1 2 3 4 5\
-    insert_date  date
+    insert_date  datetime
+)character set = utf8;
+
+create table checkin_history
+(
+    row_id int auto_increment primary key,
+    term varchar(5) not null,
+    officer_id varchar(12) references officer(officer_id),
+    officer_name varchar(255) references officer(officer_name),
+    insert_date  datetime
 )character set = utf8;
 
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(1, 1, '齐园13斋',5,'女');
@@ -87,3 +96,5 @@ select * from dorm;
 select * from officer;
 
 select * from history;
+
+select * from checkin_history;

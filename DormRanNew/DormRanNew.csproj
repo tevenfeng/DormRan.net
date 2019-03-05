@@ -97,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Editor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Checkin.xaml.cs">
+      <DependentUpon>Checkin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="checkin_history.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="dorm.cs">
       <DependentUpon>Model.tt</DependentUpon>

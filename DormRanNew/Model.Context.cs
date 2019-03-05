@@ -25,6 +25,7 @@ namespace DormRanNew
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<checkin_history> checkin_history { get; set; }
         public virtual DbSet<dorm> dorm { get; set; }
         public virtual DbSet<history> history { get; set; }
         public virtual DbSet<officer> officer { get; set; }
