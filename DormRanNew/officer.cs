@@ -16,6 +16,8 @@ namespace DormRanNew
     {
         public int row_id { get; set; }
         public string officer_id { get; set; }
+        public string officer_department { get; set; }
         public string officer_name { get; set; }
+        public string officer_gender { get; set; }
     }
 }

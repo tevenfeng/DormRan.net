@@ -34,7 +34,9 @@
           </Key>
           <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="officer_id" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="officer_department" Type="varchar" MaxLength="255" />
           <Property Name="officer_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="officer_gender" Type="enum" />
         </EntityType>
         <EntityContainer Name="check_dorm_newModelStoreContainer">
           <EntitySet Name="dorm" EntityType="Self.dorm" Schema="check_dorm_new" store:Type="Tables" />
@@ -75,7 +77,9 @@
           </Key>
           <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="officer_id" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="officer_department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="officer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="officer_gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="check_dorm_newEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="dorm" EntityType="Self.dorm" />
@@ -118,7 +122,9 @@
               <MappingFragment StoreEntitySet="officer">
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="officer_id" ColumnName="officer_id" />
+                <ScalarProperty Name="officer_department" ColumnName="officer_department" />
                 <ScalarProperty Name="officer_name" ColumnName="officer_name" />
+                <ScalarProperty Name="officer_gender" ColumnName="officer_gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

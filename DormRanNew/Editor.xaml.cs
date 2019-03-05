@@ -163,7 +163,9 @@ namespace DormRanNew
                         // row_id == 0说明是新加入的行
                         officer newOfficer = new officer();
                         newOfficer.officer_id = tmpOfficer.officer_id;
+                        newOfficer.officer_department = tmpOfficer.officer_department;
                         newOfficer.officer_name = tmpOfficer.officer_name;
+                        newOfficer.officer_gender = tmpOfficer.officer_gender;
                         db.officer.Add(newOfficer);
                         db.SaveChanges();
 
@@ -174,7 +176,9 @@ namespace DormRanNew
                     {
                         // row_id != 0说明是原先存在的行，修改即可
                         db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_id = tmpOfficer.officer_id;
+                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_department = tmpOfficer.officer_department;
                         db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_name = tmpOfficer.officer_name;
+                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_gender = tmpOfficer.officer_gender;
                         db.SaveChanges();
                     }
                 }

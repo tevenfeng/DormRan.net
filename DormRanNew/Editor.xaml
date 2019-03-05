@@ -26,8 +26,10 @@
         <DataGrid Grid.Row="0" Grid.ColumnSpan="3" Name="officeGrid" ItemsSource="{Binding}"
                   AutoGenerateColumns="False" Visibility="Hidden" RowEditEnding="officeGrid_RowEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="工号/学号" Width="*" Binding="{Binding officer_id, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="工号" Width="*" Binding="{Binding officer_id, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="部门/学院" Width="2*" Binding="{Binding officer_department, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="性别" Width="*" Binding="{Binding officer_gender, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
 
             <DataGrid.RowValidationRules>
