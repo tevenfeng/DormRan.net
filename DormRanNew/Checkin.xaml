@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:DormRanNew"
         mc:Ignorable="d"
         Title="签到" Height="300" Width="400" WindowStartupLocation="CenterOwner" 
-                     Loaded="CheckinWindow_Loaded" ResizeMode="NoResize">
+                     Loaded="CheckinWindow_Loaded" ResizeMode="NoResize" Icon="logo.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

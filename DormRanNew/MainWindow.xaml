@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DormRanNew"
         Title="学生宿舍月末卫生安全检查抽签系统" Height="800" Width="1050" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="mainWindow_Loaded" Background="White">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="mainWindow_Loaded" Background="White" Icon="logo.ico">
 
     <Grid>
         <Grid.Background>

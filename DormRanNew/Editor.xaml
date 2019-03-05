@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:DormRanNew"
         mc:Ignorable="d"
         Title="管理" Height="550" Width="500" Loaded="editorWindow_Loaded" 
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"  Icon="logo.ico">
 
 
     <Grid>
