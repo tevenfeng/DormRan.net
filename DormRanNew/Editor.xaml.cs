@@ -154,73 +154,87 @@ namespace DormRanNew
         {
             // 获取编辑后的数据
             officer tmpOfficer = (officer)e.Row.DataContext;
-            try
+            if (e.EditAction == DataGridEditAction.Commit)
             {
-                using (check_dorm_newEntities db = new check_dorm_newEntities())
+                try
                 {
-                    if (tmpOfficer.row_id.Equals(0))
+                    using (check_dorm_newEntities db = new check_dorm_newEntities())
                     {
-                        // row_id == 0说明是新加入的行
-                        officer newOfficer = new officer();
-                        newOfficer.officer_id = tmpOfficer.officer_id;
-                        newOfficer.officer_department = tmpOfficer.officer_department;
-                        newOfficer.officer_name = tmpOfficer.officer_name;
-                        newOfficer.officer_gender = tmpOfficer.officer_gender;
-                        db.officer.Add(newOfficer);
-                        db.SaveChanges();
+                        if (tmpOfficer.row_id.Equals(0))
+                        {
+                            // row_id == 0说明是新加入的行
+                            officer newOfficer = new officer();
+                            newOfficer.officer_id = tmpOfficer.officer_id;
+                            newOfficer.officer_department = tmpOfficer.officer_department;
+                            newOfficer.officer_name = tmpOfficer.officer_name;
+                            newOfficer.officer_gender = tmpOfficer.officer_gender;
+                            db.officer.Add(newOfficer);
+                            db.SaveChanges();
 
-                        // 添加完毕以后需要重新读取数据库中新加入行的row_id用于更新内存中缓存的row_id
-                        this.officers.Where(p => p.officer_id.Equals(newOfficer.officer_id)).First().row_id = db.officer.Where(p => p.officer_id.Equals(newOfficer.officer_id)).First().row_id;
-                    }
-                    else
-                    {
-                        // row_id != 0说明是原先存在的行，修改即可
-                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_id = tmpOfficer.officer_id;
-                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_department = tmpOfficer.officer_department;
-                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_name = tmpOfficer.officer_name;
-                        db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_gender = tmpOfficer.officer_gender;
-                        db.SaveChanges();
+                            // 添加完毕以后需要重新读取数据库中新加入行的row_id用于更新内存中缓存的row_id
+                            this.officers.Where(p => p.officer_id.Equals(newOfficer.officer_id)).First().row_id = db.officer.Where(p => p.officer_id.Equals(newOfficer.officer_id)).First().row_id;
+                        }
+                        else
+                        {
+                            // row_id != 0说明是原先存在的行，修改即可
+                            db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_id = tmpOfficer.officer_id;
+                            db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_department = tmpOfficer.officer_department;
+                            db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_name = tmpOfficer.officer_name;
+                            db.officer.Where(p => p.row_id.Equals(tmpOfficer.row_id)).First().officer_gender = tmpOfficer.officer_gender;
+                            db.SaveChanges();
+                        }
                     }
                 }
+                catch (Exception exp)
+                {
+                    e.Cancel = true;
+                    (sender as DataGrid).CancelEdit(DataGridEditingUnit.Row);
+                }
             }
-            catch (Exception exp) { }
         }
 
         private void dormGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             dorm tmpDorm = (dorm)e.Row.DataContext;
 
-            try
+            if (e.EditAction == DataGridEditAction.Commit)
             {
-                using (check_dorm_newEntities db = new check_dorm_newEntities())
+                try
                 {
-                    if (tmpDorm.row_id.Equals(0))
+                    using (check_dorm_newEntities db = new check_dorm_newEntities())
                     {
-                        dorm newDorm = new dorm();
-                        newDorm.area = tmpDorm.area;
-                        newDorm.group_id = tmpDorm.group_id;
-                        newDorm.dorm_name = tmpDorm.dorm_name;
-                        newDorm.floor_number = tmpDorm.floor_number;
-                        newDorm.gender = tmpDorm.gender;
+                        if (tmpDorm.row_id.Equals(0))
+                        {
+                            dorm newDorm = new dorm();
+                            newDorm.area = tmpDorm.area;
+                            newDorm.group_id = tmpDorm.group_id;
+                            newDorm.dorm_name = tmpDorm.dorm_name;
+                            newDorm.floor_number = tmpDorm.floor_number;
+                            newDorm.gender = tmpDorm.gender;
 
-                        db.dorm.Add(newDorm);
-                        db.SaveChanges();
+                            db.dorm.Add(newDorm);
+                            db.SaveChanges();
 
-                        // 添加完毕以后需要重新读取数据库中新加入行的row_id用于更新内存中缓存的row_id
-                        this.dorms.Where(p => p.dorm_name.Equals(newDorm.dorm_name)).First().row_id = db.dorm.Where(p => p.dorm_name.Equals(newDorm.dorm_name)).First().row_id;
-                    }
-                    else
-                    {
-                        db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().area = tmpDorm.area;
-                        db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().group_id = tmpDorm.group_id;
-                        db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().dorm_name = tmpDorm.dorm_name;
-                        db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().floor_number = tmpDorm.floor_number;
-                        db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().gender = tmpDorm.gender;
-                        db.SaveChanges();
+                            // 添加完毕以后需要重新读取数据库中新加入行的row_id用于更新内存中缓存的row_id
+                            this.dorms.Where(p => p.dorm_name.Equals(newDorm.dorm_name)).First().row_id = db.dorm.Where(p => p.dorm_name.Equals(newDorm.dorm_name)).First().row_id;
+                        }
+                        else
+                        {
+                            db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().area = tmpDorm.area;
+                            db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().group_id = tmpDorm.group_id;
+                            db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().dorm_name = tmpDorm.dorm_name;
+                            db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().floor_number = tmpDorm.floor_number;
+                            db.dorm.Where(p => p.row_id.Equals(tmpDorm.row_id)).First().gender = tmpDorm.gender;
+                            db.SaveChanges();
+                        }
                     }
                 }
+                catch (Exception exp)
+                {
+                    e.Cancel = true;
+                    (sender as DataGrid).CancelEdit(DataGridEditingUnit.Row);
+                }
             }
-            catch (Exception exp) { }
         }
     }
 }

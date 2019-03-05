@@ -12,9 +12,9 @@
           <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="area" Type="int" Nullable="false" />
           <Property Name="group_id" Type="int" Nullable="false" />
-          <Property Name="dorm_name" Type="varchar" MaxLength="255" />
-          <Property Name="floor_number" Type="int" />
-          <Property Name="gender" Type="enum" />
+          <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="floor_number" Type="int" Nullable="false" />
+          <Property Name="gender" Type="enum" Nullable="false" />
         </EntityType>
         <EntityType Name="history">
           <Key>
@@ -24,8 +24,8 @@
           <Property Name="term" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="check_id" Type="int" Nullable="false" />
           <Property Name="area" Type="int" Nullable="false" />
-          <Property Name="dorm_name" Type="varchar" MaxLength="255" />
-          <Property Name="floor_id" Type="varchar" MaxLength="255" />
+          <Property Name="dorm_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="floor_id" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="insert_date" Type="date" />
         </EntityType>
         <EntityType Name="officer">
@@ -34,9 +34,9 @@
           </Key>
           <Property Name="row_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="officer_id" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="officer_department" Type="varchar" MaxLength="255" />
+          <Property Name="officer_department" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="officer_name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="officer_gender" Type="enum" />
+          <Property Name="officer_gender" Type="enum" Nullable="false" />
         </EntityType>
         <EntityContainer Name="check_dorm_newModelStoreContainer">
           <EntitySet Name="dorm" EntityType="Self.dorm" Schema="check_dorm_new" store:Type="Tables" />
@@ -55,9 +55,9 @@
           <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="area" Type="Int32" Nullable="false" />
           <Property Name="group_id" Type="Int32" Nullable="false" />
-          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="floor_number" Type="Int32" />
-          <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="floor_number" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="history">
           <Key>
@@ -67,8 +67,8 @@
           <Property Name="term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="check_id" Type="Int32" Nullable="false" />
           <Property Name="area" Type="Int32" Nullable="false" />
-          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="floor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dorm_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="floor_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="insert_date" Type="DateTime" />
         </EntityType>
         <EntityType Name="officer">
@@ -77,9 +77,9 @@
           </Key>
           <Property Name="row_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="officer_id" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="officer_department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="officer_department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="officer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="officer_gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="officer_gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityContainer Name="check_dorm_newEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="dorm" EntityType="Self.dorm" />

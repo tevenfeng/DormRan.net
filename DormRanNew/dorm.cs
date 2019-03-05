@@ -18,7 +18,7 @@ namespace DormRanNew
         public int area { get; set; }
         public int group_id { get; set; }
         public string dorm_name { get; set; }
-        public Nullable<int> floor_number { get; set; }
+        public int floor_number { get; set; }
         public string gender { get; set; }
     }
 }

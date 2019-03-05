@@ -13,9 +13,9 @@ create table officer
 (
     row_id   int auto_increment primary key,
     officer_id  varchar(12) unique not null,
-    officer_department varchar(255),
+    officer_department varchar(255) not null,
     officer_name varchar(255) not null,
-    officer_gender enum('男','女')
+    officer_gender enum('男','女') not null
 )character set = utf8;
 
 create table dorm
@@ -23,9 +23,9 @@ create table dorm
     row_id int auto_increment primary key,
     area  int not null check(area>0 and area<5),
     group_id int not null check(group_id>0 and group_id<4),
-    dorm_name  varchar(255) unique,
-    floor_number  int,
-    gender enum('男','女')
+    dorm_name  varchar(255) unique not null,
+    floor_number  int not null check(floor_number>0),
+    gender enum('男','女') not null
 )character set = utf8;
 
 create table history
@@ -34,8 +34,8 @@ create table history
     term  varchar(5) not null,
     check_id int not null,
     area  int not null,
-    dorm_name  varchar(255),
-    floor_id  varchar(255),  -- 1 2 3 4 5\
+    dorm_name  varchar(255) not null,
+    floor_id  varchar(255) not null,  -- 1 2 3 4 5\
     insert_date  date
 )character set = utf8;
 
@@ -77,6 +77,7 @@ insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园22斋A',5,'男');
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园24斋A',5,'男');
 
+load data local infile "C:\\Users\\tevenfeng\\Desktop\\DormRanNew\\DormRanNew\\sql\\officer_info.csv" into table officer fields terminated by ',' lines terminated by '\r\n';
 
 set global optimizer_switch='derived_merge=off';
 set optimizer_switch='derived_merge=off';
