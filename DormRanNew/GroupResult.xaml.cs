@@ -21,11 +21,11 @@ namespace DormRanNew
     public partial class GroupResult : Window
     {
         private ObservableCollection<officer> checkedOfficers;
-        private ObservableCollection<officer> GroupResultsWomen = new ObservableCollection<officer>();
-        private ObservableCollection<officer> GroupResultsMen = new ObservableCollection<officer>();
-        private ObservableCollection<officer> GroupResultsOne = new ObservableCollection<officer>();
-        private ObservableCollection<officer> GroupResultsTwo = new ObservableCollection<officer>();
-        private ObservableCollection<officer> GroupResultsThree = new ObservableCollection<officer>();
+        private ObservableCollection<officer> GroupResultsWomen;
+        private ObservableCollection<officer> GroupResultsMen;
+        private ObservableCollection<officer> GroupResultsOne;
+        private ObservableCollection<officer> GroupResultsTwo;
+        private ObservableCollection<officer> GroupResultsThree;
         public GroupResult()
         {
             InitializeComponent();
@@ -35,10 +35,17 @@ namespace DormRanNew
         {
             InitializeComponent();
             this.checkedOfficers = checkedOfficer;
+            this.GroupResultsWomen= new ObservableCollection<officer>();
+            this.GroupResultsMen = new ObservableCollection<officer>();
+            this.GroupResultsOne = new ObservableCollection<officer>();
+            this.GroupResultsTwo = new ObservableCollection<officer>();
+            this.GroupResultsThree = new ObservableCollection<officer>();
+            checkedOfficer_Divided();
         }
 
-        private void checkedOfficer_Divided(object sender, SelectionChangedEventArgs e)
+        private void checkedOfficer_Divided()
         {
+            Random r = new Random();
             int numberOfPerson = this.checkedOfficers.Count();
             int numberOfWomen = 0;
             foreach (var tmpOfficer in checkedOfficers)
@@ -55,66 +62,89 @@ namespace DormRanNew
             }
             if (numberOfWomen <= (int)(numberOfPerson / 3))
             {
-                this.GroupResultsOne = this.GroupResultsWomen;
+               // this.GroupResultsOne = this.GroupResultsWomen;
                 this.dataGridGroupOne.ItemsSource = null;
-                this.dataGridGroupOne.ItemsSource = GroupResultsOne;
+                this.dataGridGroupOne.ItemsSource = GroupResultsWomen;
 
                 int numberOfMen = numberOfPerson - numberOfWomen;
-                Random r = new Random();
-                int n = r.Next(0, numberOfMen);
-
-                for(int i=0;i<(int)(numberOfMen/2);i++)
+                HashSet<int> hash = new HashSet<int>();
+                int restNumber1 = (int)(numberOfMen / 2);
+                while(restNumber1!=0)
                 {
-                    int index = ((i + 1) * n) % numberOfMen;
-                    GroupResultsTwo.Add(GroupResultsMen[index]);
-                    GroupResultsMen[index].officer_id = "";
+                    int index = r.Next(0, numberOfMen);
+                    if(!hash.Contains(index))
+                    {
+                        GroupResultsTwo.Add(GroupResultsMen[index]);
+                        hash.Add(index);
+                        restNumber1--;
+                    }              
                 }
                 this.dataGridGroupTwo.ItemsSource = null;
                 this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
+
+                for (int i = 0; i < numberOfMen; i++)
+                {
+                    if (!hash.Contains(i))
+                    {
+                        GroupResultsThree.Add(GroupResultsMen[i]);
+                    }
+                }
+                this.dataGridGroupThree.ItemsSource = null;
+                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
             }
             else
             {
-                int firstGroupWomen = (int)(numberOfPerson / 3);
+                int firstGroupNumber = (int)(numberOfPerson / 3);
+                int secondGroupNumber = (int)(numberOfPerson / 3 +0.5);
+                //int thirdGroupNumber = numberOfPerson - firstGroupNumber - secondGroupNumber;
                 int numberOfMen = numberOfPerson - numberOfWomen;
-                Random r = new Random();
-                int n = r.Next(0, numberOfWomen);
-
-                for (int i = 0; i < firstGroupWomen; i++)
+                HashSet<int> hash1 = new HashSet<int>();
+                while(firstGroupNumber!=0)
                 {
-                    int index = ((i + 1) * n) % numberOfWomen;
-                    GroupResultsOne.Add(GroupResultsWomen[index]);
-                    GroupResultsWomen[index].officer_id = "";
+                    int index = r.Next(0, numberOfWomen);
+                    if (!hash1.Contains(index))
+                    {
+                        GroupResultsOne.Add(GroupResultsWomen[index]);
+                        hash1.Add(index);
+                        firstGroupNumber--;
+                    }                              
                 }
                 this.dataGridGroupOne.ItemsSource = null;
                 this.dataGridGroupOne.ItemsSource = GroupResultsOne;
 
-                foreach(var tmp in GroupResultsWomen)
+                for(int i=0;i< numberOfWomen; i++)
                 {
-                    if (!tmp.officer_id.Equals(""))
+                    if(!hash1.Contains(i))
                     {
-                        GroupResultsTwo.Add(tmp);
+                        GroupResultsTwo.Add(GroupResultsWomen[i]);
                     }
                 }
 
-                int m = r.Next(0, numberOfMen);
-                for (int i = 0; i < firstGroupWomen-GroupResultsTwo.Count(); i++)
+                HashSet<int> hash2 = new HashSet<int>();
+                int restNumber2 = secondGroupNumber - GroupResultsTwo.Count();
+                while (restNumber2!=0)
                 {
-                    int index = ((i + 1) * m) % numberOfMen;
-                    GroupResultsTwo.Add(GroupResultsMen[index]);
-                    GroupResultsMen[index].officer_id = "";
+                    int index= r.Next(0, numberOfMen);
+                    if (!hash2.Contains(index))
+                    {
+                        GroupResultsTwo.Add(GroupResultsMen[index]);
+                        hash2.Add(index);
+                        restNumber2--;
+                    }      
                 }
                 this.dataGridGroupTwo.ItemsSource = null;
                 this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
-            }
-            foreach (var tmp in GroupResultsMen)
-            {
-                if (!tmp.officer_id.Equals(""))
+
+                for (int i = 0; i < numberOfMen ; i++)
                 {
-                    GroupResultsThree.Add(tmp);
+                    if (!hash2.Contains(i))
+                    {
+                        GroupResultsThree.Add(GroupResultsMen[i]);
+                    }
                 }
+                this.dataGridGroupThree.ItemsSource = null;
+                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
             }
-            this.dataGridGroupThree.ItemsSource = null;
-            this.dataGridGroupThree.ItemsSource = GroupResultsThree;
         }
     }
 }
