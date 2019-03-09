@@ -99,7 +99,13 @@ namespace DormRanNew
 
         private void btnGroupOfficers_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
 
+=======
+            GroupResult groupResultWindow = new GroupResult(checkedOfficers);
+            groupResultWindow.Owner = this;
+            groupResultWindow.ShowDialog();
+>>>>>>> 添加人员分组
         }
     }
 }

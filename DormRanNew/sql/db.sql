@@ -86,7 +86,11 @@ insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园22斋A',5,'男');
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园24斋A',5,'男');
 
+<<<<<<< HEAD
 load data local infile "C:\\Users\\tevenfeng\\Desktop\\DormRanNew\\DormRanNew\\sql\\officer_info.csv" into table officer fields terminated by ',' lines terminated by '\r\n';
+=======
+load data local infile "C:\\Users\\zhusi\\Desktop\\DormRanNew\\DormRanNew\\sql\\officer_info.csv" into table officer fields terminated by ',' lines terminated by '\r\n';
+>>>>>>> 添加人员分组
 
 set global optimizer_switch='derived_merge=off';
 set optimizer_switch='derived_merge=off';

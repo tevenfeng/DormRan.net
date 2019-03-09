@@ -123,6 +123,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+=======
+    <Page Include="GroupResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> 添加人员分组
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,6 +150,12 @@
     <Compile Include="Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="GroupResult.xaml.cs">
+      <DependentUpon>GroupResult.xaml</DependentUpon>
+    </Compile>
+>>>>>>> 添加人员分组
     <Compile Include="history.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
