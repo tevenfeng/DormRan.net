@@ -4,8 +4,8 @@ SET character_set_database = utf8;
 SET character_set_results = utf8;
 SET character_set_server = utf8;
 
-drop database if exists check_dorm_New;
-create database check_dorm_New DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+drop database if exists check_dorm_new;
+create database check_dorm_new DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 use check_dorm_new;
 

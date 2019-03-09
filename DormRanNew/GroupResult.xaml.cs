@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using MahApps.Metro.Controls;
 
 namespace DormRanNew
 {
     /// <summary>
     /// GroupResult.xaml 的交互逻辑
     /// </summary>
-    public partial class GroupResult : Window
+    public partial class GroupResult : MetroWindow
     {
         private ObservableCollection<officer> checkedOfficers;
         private ObservableCollection<officer> GroupResultsWomen;
