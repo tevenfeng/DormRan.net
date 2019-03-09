@@ -6,34 +6,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DormRanNew"
         mc:Ignorable="d"
-        Title="签到" Height="300" Width="400" WindowStartupLocation="CenterOwner" 
+        Title="签到" Height="400" Width="650" WindowStartupLocation="CenterOwner" 
                      Loaded="CheckinWindow_Loaded" ResizeMode="NoResize" Icon="logo.ico">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="学院/部门" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
-            <ComboBox Name="checkinDepartment" Grid.Column="1" Width="136" HorizontalAlignment="Center" VerticalAlignment="Center"
-                  SelectionChanged="checkinDepartment_SelectionChanged" FontSize="14"/>
+            
+            <Label Grid.Row="0" Grid.Column="0" Content="学院/部门" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20"/>
+            <ComboBox Name="checkinDepartment" Grid.Row="0" Grid.Column="1" Width="194" HorizontalAlignment="Center" VerticalAlignment="Center"
+                  SelectionChanged="checkinDepartment_SelectionChanged" FontSize="14" FontFamily="宋体" FontWeight="Bold"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="姓名" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" />
+            <ComboBox Name="checkinComboBox" Grid.Row="1" Grid.Column="1" Width="194" HorizontalAlignment="Center" FontSize="14" FontFamily="宋体"
+                  VerticalAlignment="Center" DisplayMemberPath="officer_name" SelectedValuePath="officer_id" FontWeight="Bold"/>
+
+            <Button Name="btnCheckin" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="宋体" FontSize="26" Content="签到" Click="btnCheckin_Click"/>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="姓名" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" />
-            <ComboBox Name="checkinComboBox" Grid.Column="1" Width="136" HorizontalAlignment="Center" FontSize="14"
-                  VerticalAlignment="Center" DisplayMemberPath="officer_name" SelectedValuePath="officer_id"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0" Name="checkinDataGrid" Background="Transparent" ItemsSource="{Binding}"
+                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="16">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="工号" Width="*" Binding="{Binding officer_id}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="性别" Width="*" Binding="{Binding officer_gender}" ></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Grid.Row="1" Name="btnGroupOfficers" FontFamily="宋体" FontSize="26" Content="分组"
+                    Click="btnGroupOfficers_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
-        <Button Name="btnCheckin" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontFamily="宋体" FontSize="26" Content="签到" Click="btnCheckin_Click"/>
+        
     </Grid>
 </Controls:MetroWindow>

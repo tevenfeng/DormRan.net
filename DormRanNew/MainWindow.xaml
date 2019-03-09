@@ -32,7 +32,7 @@
             </Grid.RowDefinitions>
 
             <Button Name="btnDatabaseManagement" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="宋体" FontSize="40" Click="btnDatabaseManagement_Click">数据库管理</Button>
+                    FontFamily="宋体" FontSize="40" Click="btnDatabaseManagement_Click">数据管理</Button>
             
             <Label Grid.Row="1" Name="samplingDormLabel"
                                 VerticalAlignment="Top" HorizontalAlignment="Center"
@@ -50,7 +50,7 @@
                                 FontSize="30" Foreground="#000000" Margin="3,0,3,60" Text="第1次抽查"/>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,12,0">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,24,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
@@ -62,7 +62,7 @@
 
             <TextBlock Grid.Row="0" Name="textBlockGroupOne" VerticalAlignment="Center" Text="第一组" FontSize="26" TextAlignment="Center" />
             <DataGrid Grid.Row="1" Name="dataGridGroupOne" Background="Transparent" ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="18">
+                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="宿舍" Width="*" Binding="{Binding dormName}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="性别" Width="*" Binding="{Binding gender}" ></DataGridTextColumn>
@@ -72,7 +72,7 @@
 
             <TextBlock Grid.Row="2" Name="textBlockGroupTwo" VerticalAlignment="Center" Text="第二组" FontSize="26" TextAlignment="Center" />
             <DataGrid Grid.Row="3" Name="dataGridGroupTwo" Background="Transparent" ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="18">
+                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="宿舍" Width="*" Binding="{Binding dormName}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="性别" Width="*" Binding="{Binding gender}" ></DataGridTextColumn>
@@ -82,7 +82,7 @@
 
             <TextBlock Grid.Row="4" Name="textBlockGroupThree" VerticalAlignment="Center" Text="第三组" FontSize="26" TextAlignment="Center" />
             <DataGrid Grid.Row="5" Name="dataGridGroupThree" Background="Transparent" ItemsSource="{Binding}"
-                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="18">
+                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="宿舍" Width="*" Binding="{Binding dormName}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="性别" Width="*" Binding="{Binding gender}" ></DataGridTextColumn>

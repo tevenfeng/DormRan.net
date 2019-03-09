@@ -26,6 +26,8 @@ namespace DormRanNew
 
         private HashSet<string> departments;
 
+        private ObservableCollection<officer> checkedOfficers;
+
         public Checkin()
         {
             InitializeComponent();
@@ -51,6 +53,9 @@ namespace DormRanNew
                     {
                         db.checkin_history.Add(tmpHistory);
                         db.SaveChanges();
+                        this.checkedOfficers.Add(selectedOfficer);
+                        this.checkinDataGrid.ItemsSource = null;
+                        this.checkinDataGrid.ItemsSource = this.checkedOfficers;
                     }
 
                     await this.ShowMessageAsync("", "签到成功！");
@@ -88,7 +93,13 @@ namespace DormRanNew
                 }
 
                 this.checkinDepartment.ItemsSource = this.departments;
+                this.checkedOfficers = new ObservableCollection<officer>();
             }
+        }
+
+        private void btnGroupOfficers_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
