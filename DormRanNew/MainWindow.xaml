@@ -43,7 +43,7 @@
 
             <TextBlock Grid.Row="2" Name="termText"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                                FontSize="35" Foreground="#000000" Margin="3,40,3,53" Text="181902学期"/>
+                                FontSize="35" Foreground="#000000" Margin="3,40,3,53" Text="18192学期"/>
 
             <TextBlock Grid.Row="2" Name="checkIdText"
                                 HorizontalAlignment="Center" VerticalAlignment="Bottom"

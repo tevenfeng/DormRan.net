@@ -7,7 +7,7 @@ SET character_set_server = utf8;
 drop database if exists check_dorm_New;
 create database check_dorm_New DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-use check_dorm_New;
+use check_dorm_new;
 
 create table officer
 (
@@ -86,10 +86,10 @@ insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园22斋A',5,'男');
 insert into dorm(area, group_id, dorm_name, floor_number, gender) values(4, 3, '平园24斋A',5,'男');
 
-load data local infile "C:\\Users\\tevenfeng\\Desktop\\DormRanNew\\DormRanNew\\sql\\officer_info.csv" into table officer fields terminated by ',' lines terminated by '\r\n';
-
 set global optimizer_switch='derived_merge=off';
 set optimizer_switch='derived_merge=off';
+
+load data local infile "C:\\Users\\tevenfeng\\Desktop\\DormRanNew\\DormRanNew\\sql\\officer_info.csv" into table officer fields terminated by ',' lines terminated by '\r\n';
 
 select * from dorm;
 

@@ -99,7 +99,9 @@ namespace DormRanNew
 
         private void btnGroupOfficers_Click(object sender, RoutedEventArgs e)
         {
-
+            GroupResult groupResultWindow = new GroupResult(checkedOfficers);
+            groupResultWindow.Owner = this;
+            groupResultWindow.ShowDialog();
         }
     }
 }
