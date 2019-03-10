@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="check_dorm_newModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="check_dorm_oldModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="checkin_history">
           <Key>
             <PropertyRef Name="row_id" />
@@ -48,17 +48,17 @@
           <Property Name="officer_name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="officer_gender" Type="enum" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="check_dorm_newModelStoreContainer">
-          <EntitySet Name="checkin_history" EntityType="Self.checkin_history" Schema="check_dorm_new" store:Type="Tables" />
-          <EntitySet Name="dorm" EntityType="Self.dorm" Schema="check_dorm_new" store:Type="Tables" />
-          <EntitySet Name="history" EntityType="Self.history" Schema="check_dorm_new" store:Type="Tables" />
-          <EntitySet Name="officer" EntityType="Self.officer" Schema="check_dorm_new" store:Type="Tables" />
+        <EntityContainer Name="check_dorm_oldModelStoreContainer">
+          <EntitySet Name="checkin_history" EntityType="Self.checkin_history" Schema="check_dorm_old" store:Type="Tables" />
+          <EntitySet Name="dorm" EntityType="Self.dorm" Schema="check_dorm_old" store:Type="Tables" />
+          <EntitySet Name="history" EntityType="Self.history" Schema="check_dorm_old" store:Type="Tables" />
+          <EntitySet Name="officer" EntityType="Self.officer" Schema="check_dorm_old" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="check_dorm_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="check_dorm_oldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="checkin_history">
           <Key>
             <PropertyRef Name="row_id" />
@@ -102,7 +102,7 @@
           <Property Name="officer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="officer_gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="check_dorm_newEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="check_dorm_oldEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="checkin_history" EntityType="Self.checkin_history" />
           <EntitySet Name="dorm" EntityType="Self.dorm" />
           <EntitySet Name="history" EntityType="Self.history" />
@@ -113,9 +113,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="check_dorm_newModelStoreContainer" CdmEntityContainer="check_dorm_newEntities">
+        <EntityContainerMapping StorageEntityContainer="check_dorm_oldModelStoreContainer" CdmEntityContainer="check_dorm_oldEntities">
           <EntitySetMapping Name="checkin_history">
-            <EntityTypeMapping TypeName="check_dorm_newModel.checkin_history">
+            <EntityTypeMapping TypeName="check_dorm_oldModel.checkin_history">
               <MappingFragment StoreEntitySet="checkin_history">
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="term" ColumnName="term" />
@@ -126,7 +126,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dorm">
-            <EntityTypeMapping TypeName="check_dorm_newModel.dorm">
+            <EntityTypeMapping TypeName="check_dorm_oldModel.dorm">
               <MappingFragment StoreEntitySet="dorm">
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="area" ColumnName="area" />
@@ -138,7 +138,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="history">
-            <EntityTypeMapping TypeName="check_dorm_newModel.history">
+            <EntityTypeMapping TypeName="check_dorm_oldModel.history">
               <MappingFragment StoreEntitySet="history">
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="term" ColumnName="term" />
@@ -151,7 +151,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="officer">
-            <EntityTypeMapping TypeName="check_dorm_newModel.officer">
+            <EntityTypeMapping TypeName="check_dorm_oldModel.officer">
               <MappingFragment StoreEntitySet="officer">
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
                 <ScalarProperty Name="officer_id" ColumnName="officer_id" />

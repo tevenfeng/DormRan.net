@@ -37,7 +37,7 @@ namespace DormRanNew
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private check_dorm_newEntities db;
+        private check_dorm_oldEntities db;
 
         /// <summary>
         /// 经过筛选以后的本次可被选择的区域
@@ -100,16 +100,6 @@ namespace DormRanNew
         private ObservableCollection<Result> dormsShow2;
 
         /// <summary>
-        /// 存储选定区域组3的宿舍楼
-        /// </summary>
-        private List<dorm> dormsGroup3;
-
-        /// <summary>
-        /// 显示选定区域组3的宿舍楼
-        /// </summary>
-        private ObservableCollection<Result> dormsShow3;
-
-        /// <summary>
         /// 存储历史相关信息，加载到内存中，加快速度
         /// </summary>
         private List<history> myHistories;
@@ -163,7 +153,7 @@ namespace DormRanNew
         /// <param name="e"></param>
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.db = new check_dorm_newEntities();
+            this.db = new check_dorm_oldEntities();
             this.timer1 = new System.Windows.Threading.DispatcherTimer();
             this.timer1.Tick += new EventHandler(OnTimer1Event);
             this.timer1.Interval = TimeSpan.FromSeconds(1.0 / 200);
@@ -180,7 +170,6 @@ namespace DormRanNew
             this.newHistories = new List<history>();
             this.dormsShow1 = new ObservableCollection<Result>();
             this.dormsShow2 = new ObservableCollection<Result>();
-            this.dormsShow3 = new ObservableCollection<Result>();
 
             term = getTerm();
 
@@ -232,16 +221,14 @@ namespace DormRanNew
             this.lastTermHistories = this.getLastTermHistories();
             this.newHistories.Clear();
             this.areas = getAreasAvailable(term);
-            getDormsSelected(this.areas[this.rd.Next(0, this.areas.Count)], out this.dormsGroup1, 
-                out this.dormsGroup2, out this.dormsGroup3);
+            getDormsSelected(this.areas[this.rd.Next(0, this.areas.Count)], out this.dormsGroup1,
+                out this.dormsGroup2);
 
             this.dataGridGroupOne.ItemsSource = null;
             this.dataGridGroupTwo.ItemsSource = null;
-            this.dataGridGroupThree.ItemsSource = null;
 
             this.dormsShow1.Clear();
             this.dormsShow2.Clear();
-            this.dormsShow3.Clear();
 
             this.btnStartSampling.IsEnabled = false;
             this.timer1.Start();
@@ -381,12 +368,10 @@ namespace DormRanNew
                 if (this.dormsGroup1.Count != 0)
                 {
                     firstDorm = this.dormsGroup1.First();
-                } else if (this.dormsGroup2.Count != 0)
+                }
+                else if (this.dormsGroup2.Count != 0)
                 {
                     firstDorm = this.dormsGroup2.First();
-                } else if (this.dormsGroup3.Count != 0)
-                {
-                    firstDorm = this.dormsGroup3.First();
                 }
 
                 List<string> floors = this.getFloors(firstDorm);
@@ -399,8 +384,8 @@ namespace DormRanNew
                     floorsSelected += floors[i] + " ";
                 }
 
-                floorsOfDorm += floors[floors.Count-1] + "层";
-                floorsSelected += floors[floors.Count-1];
+                floorsOfDorm += floors[floors.Count - 1] + "层";
+                floorsSelected += floors[floors.Count - 1];
 
                 this.samplingDormLabel.Content = firstDorm.dorm_name;
                 this.samplingFloorLabel.Content = floorsOfDorm;
@@ -424,15 +409,8 @@ namespace DormRanNew
                     this.dataGridGroupTwo.ItemsSource = dormsShow2;
                     this.dormsGroup2.RemoveAt(0);
                 }
-                else if (this.dormsGroup3.Count != 0)
-                {
-                    this.dormsShow3.Add(result);
-                    this.dataGridGroupThree.ItemsSource = null;
-                    this.dataGridGroupThree.ItemsSource = dormsShow3;
-                    this.dormsGroup3.RemoveAt(0);
-                }
 
-                if (this.dormsGroup3.Count == 0)
+                if (this.dormsGroup2.Count == 0)
                 {
                     this.timer2.Stop();
                     this.btnStartSampling.IsEnabled = true;
@@ -457,7 +435,7 @@ namespace DormRanNew
         {
             List<int> result = new List<int>();
 
-            List<int> AllAreas = new List<int> { 1, 2, 3, 4};
+            List<int> AllAreas = new List<int> { 1, 2, 3, 4 };
 
             List<int> areasSelected = getAreasSelected(term);
 
@@ -492,8 +470,8 @@ namespace DormRanNew
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        private void getDormsSelected(int area, out List<dorm> dromsGroup1, 
-            out List<dorm> dromsGroup2, out List<dorm> dromsGroup3)
+        private void getDormsSelected(int area, out List<dorm> dromsGroup1,
+            out List<dorm> dromsGroup2)
         {
             List<dorm> dorms;
             dorms = this.myDorms
@@ -504,9 +482,6 @@ namespace DormRanNew
                 .ToList();
             dromsGroup2 = dorms
                 .Where(q => q.group_id.Equals(2))
-                .ToList();
-            dromsGroup3 = dorms
-                .Where(q => q.group_id.Equals(3))
                 .ToList();
         }
 

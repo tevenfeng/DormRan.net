@@ -49,7 +49,7 @@ namespace DormRanNew
                     tmpHistory.term = MainWindow.term;
                     tmpHistory.insert_date = DateTime.Now;
 
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         db.checkin_history.Add(tmpHistory);
                         db.SaveChanges();
@@ -71,7 +71,7 @@ namespace DormRanNew
             {
                 if (!selected_department.Trim().Equals(""))
                 {
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         this.officers = new ObservableCollection<officer>(db.officer.Where(p=>p.officer_department.Equals(selected_department)).ToList());
                         this.checkinComboBox.ItemsSource = this.officers;
@@ -83,7 +83,7 @@ namespace DormRanNew
 
         private void CheckinWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            using (check_dorm_newEntities db = new check_dorm_newEntities())
+            using (check_dorm_oldEntities db = new check_dorm_oldEntities())
             {
                 List<officer> tmp = db.officer.ToList();
                 this.departments = new HashSet<string>();

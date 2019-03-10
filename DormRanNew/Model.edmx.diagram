@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f12471cd10d44849bcc2a3e87ba9589" Name="Diagram1">
-        <EntityTypeShape EntityType="check_dorm_newModel.checkin_history" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="check_dorm_newModel.dorm" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="check_dorm_newModel.history" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="check_dorm_newModel.officer" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="3b5104428a40420db4cd4f74513d5b52" Name="Diagram1">
+        <EntityTypeShape EntityType="check_dorm_oldModel.checkin_history" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="check_dorm_oldModel.dorm" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="check_dorm_oldModel.history" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="check_dorm_oldModel.officer" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

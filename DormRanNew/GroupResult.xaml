@@ -14,8 +14,6 @@
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Name="textBlockGroupOne" VerticalAlignment="Center" Text="第一组" FontSize="26" TextAlignment="Center" />
         <DataGrid Grid.Row="1" Name="dataGridGroupOne" Background="Transparent" ItemsSource="{Binding}" 
@@ -28,15 +26,6 @@
         </DataGrid>
         <TextBlock Grid.Row="2" Name="textBlockGroupTwo" VerticalAlignment="Center" Text="第二组" FontSize="26" TextAlignment="Center" />
         <DataGrid Grid.Row="3" Name="dataGridGroupTwo" Background="Transparent" ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="工号" Width="*" Binding="{Binding officer_id}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="姓名" Width="*" Binding="{Binding officer_name}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="学院" Width="2*" Binding="{Binding officer_department}" ></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBlock Grid.Row="4" Name="textBlockGroupThree" VerticalAlignment="Center" Text="第三组" FontSize="26" TextAlignment="Center" />
-        <DataGrid Grid.Row="5" Name="dataGridGroupThree" Background="Transparent" ItemsSource="{Binding}" 
                       AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="工号" Width="*" Binding="{Binding officer_id}" ></DataGridTextColumn>

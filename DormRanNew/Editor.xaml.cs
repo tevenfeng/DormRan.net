@@ -46,7 +46,7 @@ namespace DormRanNew
 
         private void editorWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            using (check_dorm_newEntities db = new check_dorm_newEntities())
+            using (check_dorm_oldEntities db = new check_dorm_oldEntities())
             {
                 // 读取已有数据
                 if (this.management == Management.人员)
@@ -94,7 +94,7 @@ namespace DormRanNew
                 {
                     // 删除的是人员数据
                     officer tmpOfficer = (officer)this.officeGrid.SelectedItem;
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         MessageDialogResult result = await this.ShowMessageAsync("人员管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
                         if (result != MessageDialogResult.Negative)
@@ -112,7 +112,7 @@ namespace DormRanNew
                 {
                     // 删除的是楼栋数据
                     dorm tmpDorm = (dorm)this.dormGrid.SelectedItem;
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         MessageDialogResult result = await this.ShowMessageAsync("楼栋管理", "您确定要删除该行数据吗", MessageDialogStyle.AffirmativeAndNegative);
                         if (result != MessageDialogResult.Negative)
@@ -138,7 +138,7 @@ namespace DormRanNew
             {
                 try
                 {
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         if (tmpOfficer.row_id.Equals(0))
                         {
@@ -181,7 +181,7 @@ namespace DormRanNew
             {
                 try
                 {
-                    using (check_dorm_newEntities db = new check_dorm_newEntities())
+                    using (check_dorm_oldEntities db = new check_dorm_oldEntities())
                     {
                         if (tmpDorm.row_id.Equals(0))
                         {

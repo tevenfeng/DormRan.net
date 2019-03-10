@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="images/新校区图片3.png"/>
+            <ImageBrush ImageSource="images/老校区图片1.png"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -56,8 +56,6 @@
                 <RowDefinition Height="4*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="4*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Name="textBlockGroupOne" VerticalAlignment="Center" Text="第一组" FontSize="26" TextAlignment="Center" />
@@ -72,16 +70,6 @@
 
             <TextBlock Grid.Row="2" Name="textBlockGroupTwo" VerticalAlignment="Center" Text="第二组" FontSize="26" TextAlignment="Center" />
             <DataGrid Grid.Row="3" Name="dataGridGroupTwo" Background="Transparent" ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="宿舍" Width="*" Binding="{Binding dormName}" ></DataGridTextColumn>
-                    <DataGridTextColumn Header="性别" Width="*" Binding="{Binding gender}" ></DataGridTextColumn>
-                    <DataGridTextColumn Header="楼层" Width="2*" Binding="{Binding floorsOfDorm}" ></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <TextBlock Grid.Row="4" Name="textBlockGroupThree" VerticalAlignment="Center" Text="第三组" FontSize="26" TextAlignment="Center" />
-            <DataGrid Grid.Row="5" Name="dataGridGroupThree" Background="Transparent" ItemsSource="{Binding}"
                       AutoGenerateColumns="False" IsReadOnly="True" FontSize="24">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="宿舍" Width="*" Binding="{Binding dormName}" ></DataGridTextColumn>

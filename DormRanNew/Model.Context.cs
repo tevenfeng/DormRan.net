@@ -13,10 +13,10 @@ namespace DormRanNew
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class check_dorm_newEntities : DbContext
+    public partial class check_dorm_oldEntities : DbContext
     {
-        public check_dorm_newEntities()
-            : base("name=check_dorm_newEntities")
+        public check_dorm_oldEntities()
+            : base("name=check_dorm_oldEntities")
         {
         }
     

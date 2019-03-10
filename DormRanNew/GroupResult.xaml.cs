@@ -61,44 +61,18 @@ namespace DormRanNew
                     this.GroupResultsMen.Add(tmpOfficer);
                 }
             }
-            if (numberOfWomen <= (int)(numberOfPerson / 3))
+            if (numberOfWomen <= (int)(numberOfPerson / 2))
             {
                // this.GroupResultsOne = this.GroupResultsWomen;
                 this.dataGridGroupOne.ItemsSource = null;
                 this.dataGridGroupOne.ItemsSource = GroupResultsWomen;
 
-                int numberOfMen = numberOfPerson - numberOfWomen;
-                HashSet<int> hash = new HashSet<int>();
-                int restNumber1 = (int)(numberOfMen / 2);
-                while(restNumber1!=0)
-                {
-                    int index = r.Next(0, numberOfMen);
-                    if(!hash.Contains(index))
-                    {
-                        GroupResultsTwo.Add(GroupResultsMen[index]);
-                        hash.Add(index);
-                        restNumber1--;
-                    }              
-                }
                 this.dataGridGroupTwo.ItemsSource = null;
-                this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
-
-                for (int i = 0; i < numberOfMen; i++)
-                {
-                    if (!hash.Contains(i))
-                    {
-                        GroupResultsThree.Add(GroupResultsMen[i]);
-                    }
-                }
-                this.dataGridGroupThree.ItemsSource = null;
-                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
+                this.dataGridGroupTwo.ItemsSource = GroupResultsMen;
             }
             else
             {
-                int firstGroupNumber = (int)(numberOfPerson / 3);
-                int secondGroupNumber = (int)(numberOfPerson / 3 +0.5);
-                //int thirdGroupNumber = numberOfPerson - firstGroupNumber - secondGroupNumber;
-                int numberOfMen = numberOfPerson - numberOfWomen;
+                int firstGroupNumber = (int)(numberOfPerson / 2);
                 HashSet<int> hash1 = new HashSet<int>();
                 while(firstGroupNumber!=0)
                 {
@@ -108,7 +82,7 @@ namespace DormRanNew
                         GroupResultsOne.Add(GroupResultsWomen[index]);
                         hash1.Add(index);
                         firstGroupNumber--;
-                    }                              
+                    }
                 }
                 this.dataGridGroupOne.ItemsSource = null;
                 this.dataGridGroupOne.ItemsSource = GroupResultsOne;
@@ -121,30 +95,13 @@ namespace DormRanNew
                     }
                 }
 
-                HashSet<int> hash2 = new HashSet<int>();
-                int restNumber2 = secondGroupNumber - GroupResultsTwo.Count();
-                while (restNumber2!=0)
+                foreach(var tmp in GroupResultsMen)
                 {
-                    int index= r.Next(0, numberOfMen);
-                    if (!hash2.Contains(index))
-                    {
-                        GroupResultsTwo.Add(GroupResultsMen[index]);
-                        hash2.Add(index);
-                        restNumber2--;
-                    }      
+                    GroupResultsTwo.Add(tmp);
                 }
+
                 this.dataGridGroupTwo.ItemsSource = null;
                 this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
-
-                for (int i = 0; i < numberOfMen ; i++)
-                {
-                    if (!hash2.Contains(i))
-                    {
-                        GroupResultsThree.Add(GroupResultsMen[i]);
-                    }
-                }
-                this.dataGridGroupThree.ItemsSource = null;
-                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
             }
         }
     }
