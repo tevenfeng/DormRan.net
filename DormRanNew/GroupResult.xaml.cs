@@ -50,7 +50,7 @@ namespace DormRanNew
             int numberOfWomen = 0;
             foreach (var tmpOfficer in checkedOfficers)
             {
-                if(tmpOfficer.officer_gender.Equals("女"))
+                if (tmpOfficer.officer_gender.Equals("女"))
                 {
                     numberOfWomen++;
                     this.GroupResultsWomen.Add(tmpOfficer);
@@ -60,91 +60,80 @@ namespace DormRanNew
                     this.GroupResultsMen.Add(tmpOfficer);
                 }
             }
-            if (numberOfWomen <= (int)(numberOfPerson / 3))
+            int numberOfMen = numberOfPerson - numberOfWomen;
+            int secondGroupMenNumber = (int)(numberOfMen * 1.0 / 2);
+            int thirdGroupMenNumber = numberOfMen - secondGroupMenNumber;
+            HashSet<int> GroupMen = new HashSet<int>();
+            HashSet<int> GroupWomen = new HashSet<int>();
+            int middleSecondNumber = secondGroupMenNumber;
+            while (middleSecondNumber > 0)
             {
-               // this.GroupResultsOne = this.GroupResultsWomen;
-                this.dataGridGroupOne.ItemsSource = null;
-                this.dataGridGroupOne.ItemsSource = GroupResultsWomen;
-
-                int numberOfMen = numberOfPerson - numberOfWomen;
-                HashSet<int> hash = new HashSet<int>();
-                int restNumber1 = (int)(numberOfMen / 2);
-                while(restNumber1!=0)
+                int index = r.Next(0, numberOfMen);
+                if(!GroupMen.Contains(index))
                 {
-                    int index = r.Next(0, numberOfMen);
-                    if(!hash.Contains(index))
-                    {
-                        GroupResultsTwo.Add(GroupResultsMen[index]);
-                        hash.Add(index);
-                        restNumber1--;
-                    }              
+                    GroupResultsTwo.Add(GroupResultsMen[index]);
+                    GroupMen.Add(index);
+                    middleSecondNumber--;
                 }
-                this.dataGridGroupTwo.ItemsSource = null;
-                this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
-
-                for (int i = 0; i < numberOfMen; i++)
+            }
+            for(int i=0;i<numberOfMen;i++)
+            {
+                if(!GroupMen.Contains(i))
                 {
-                    if (!hash.Contains(i))
-                    {
-                        GroupResultsThree.Add(GroupResultsMen[i]);
-                    }
+                    GroupResultsThree.Add(GroupResultsMen[i]);
+                    GroupMen.Add(i);
                 }
-                this.dataGridGroupThree.ItemsSource = null;
-                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
+            }
+            if(numberOfWomen<=secondGroupMenNumber)
+            {
+                this.GroupResultsOne = this.GroupResultsWomen;
             }
             else
             {
-                int firstGroupNumber = (int)(numberOfPerson / 3);
-                int secondGroupNumber = (int)(numberOfPerson / 3 +0.5);
-                //int thirdGroupNumber = numberOfPerson - firstGroupNumber - secondGroupNumber;
-                int numberOfMen = numberOfPerson - numberOfWomen;
-                HashSet<int> hash1 = new HashSet<int>();
-                while(firstGroupNumber!=0)
+                int middleFirstNumber = secondGroupMenNumber;
+                while(middleFirstNumber>0)
                 {
                     int index = r.Next(0, numberOfWomen);
-                    if (!hash1.Contains(index))
+                    if (!GroupWomen.Contains(index))
                     {
                         GroupResultsOne.Add(GroupResultsWomen[index]);
-                        hash1.Add(index);
-                        firstGroupNumber--;
-                    }                              
-                }
-                this.dataGridGroupOne.ItemsSource = null;
-                this.dataGridGroupOne.ItemsSource = GroupResultsOne;
-
-                for(int i=0;i< numberOfWomen; i++)
-                {
-                    if(!hash1.Contains(i))
-                    {
-                        GroupResultsTwo.Add(GroupResultsWomen[i]);
+                        GroupWomen.Add(index);
+                        middleFirstNumber--;
                     }
                 }
-
-                HashSet<int> hash2 = new HashSet<int>();
-                int restNumber2 = secondGroupNumber - GroupResultsTwo.Count();
-                while (restNumber2!=0)
+                int restNumber = numberOfWomen - secondGroupMenNumber;
+                int mod = 0;
+                while(restNumber>0)
                 {
-                    int index= r.Next(0, numberOfMen);
-                    if (!hash2.Contains(index))
+                    int index = r.Next(0, numberOfWomen);
+                    if (!GroupWomen.Contains(index))
                     {
-                        GroupResultsTwo.Add(GroupResultsMen[index]);
-                        hash2.Add(index);
-                        restNumber2--;
-                    }      
-                }
-                this.dataGridGroupTwo.ItemsSource = null;
-                this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
-
-                for (int i = 0; i < numberOfMen ; i++)
-                {
-                    if (!hash2.Contains(i))
-                    {
-                        GroupResultsThree.Add(GroupResultsMen[i]);
+                        if(mod==0)
+                        {
+                            GroupResultsOne.Add(GroupResultsWomen[index]);
+                            mod = 1;
+                        }
+                        else if(mod==1)
+                        {
+                            GroupResultsTwo.Add(GroupResultsWomen[index]);
+                            mod = 2;
+                        }
+                        else
+                        {
+                            GroupResultsThree.Add(GroupResultsWomen[index]);
+                            mod = 0;
+                        }
+                        GroupWomen.Add(index);
+                        restNumber--;
                     }
                 }
-                this.dataGridGroupThree.ItemsSource = null;
-                this.dataGridGroupThree.ItemsSource = GroupResultsThree;
             }
+            this.dataGridGroupOne.ItemsSource = null;
+            this.dataGridGroupOne.ItemsSource = this.GroupResultsOne;
+            this.dataGridGroupTwo.ItemsSource = null;
+            this.dataGridGroupTwo.ItemsSource = this.GroupResultsTwo;
+            this.dataGridGroupThree.ItemsSource = null;
+            this.dataGridGroupThree.ItemsSource = this.GroupResultsThree;
         }
     }
 }
