@@ -34,6 +34,8 @@ namespace DormRanNew
     {
         #region 变量
 
+        private bool canAddToLabel = false;
+
         /// <summary>
         /// 数据库连接
         /// </summary>
@@ -223,6 +225,7 @@ namespace DormRanNew
         /// <param name="e"></param>
         private void btnStartSampling_Click(object sender, RoutedEventArgs e)
         {
+            this.samplingFloorLabel.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (this.btnSaveRecord.IsEnabled)
             {
                 this.btnSaveRecord.IsEnabled = false;
@@ -232,7 +235,7 @@ namespace DormRanNew
             this.lastTermHistories = this.getLastTermHistories();
             this.newHistories.Clear();
             this.areas = getAreasAvailable(term);
-            getDormsSelected(this.areas[this.rd.Next(0, this.areas.Count)], out this.dormsGroup1, 
+            getDormsSelected(this.areas[this.rd.Next(0, this.areas.Count)], out this.dormsGroup1,
                 out this.dormsGroup2, out this.dormsGroup3);
 
             this.dataGridGroupOne.ItemsSource = null;
@@ -381,10 +384,12 @@ namespace DormRanNew
                 if (this.dormsGroup1.Count != 0)
                 {
                     firstDorm = this.dormsGroup1.First();
-                } else if (this.dormsGroup2.Count != 0)
+                }
+                else if (this.dormsGroup2.Count != 0)
                 {
                     firstDorm = this.dormsGroup2.First();
-                } else if (this.dormsGroup3.Count != 0)
+                }
+                else if (this.dormsGroup3.Count != 0)
                 {
                     firstDorm = this.dormsGroup3.First();
                 }
@@ -399,8 +404,8 @@ namespace DormRanNew
                     floorsSelected += floors[i] + " ";
                 }
 
-                floorsOfDorm += floors[floors.Count-1] + "层";
-                floorsSelected += floors[floors.Count-1];
+                floorsOfDorm += floors[floors.Count - 1] + "层";
+                floorsSelected += floors[floors.Count - 1];
 
                 this.samplingDormLabel.Content = firstDorm.dorm_name;
                 this.samplingFloorLabel.Content = floorsOfDorm;
@@ -457,7 +462,7 @@ namespace DormRanNew
         {
             List<int> result = new List<int>();
 
-            List<int> AllAreas = new List<int> { 1, 2, 3, 4};
+            List<int> AllAreas = new List<int> { 1, 2, 3, 4 };
 
             List<int> areasSelected = getAreasSelected(term);
 
@@ -492,7 +497,7 @@ namespace DormRanNew
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        private void getDormsSelected(int area, out List<dorm> dromsGroup1, 
+        private void getDormsSelected(int area, out List<dorm> dromsGroup1,
             out List<dorm> dromsGroup2, out List<dorm> dromsGroup3)
         {
             List<dorm> dorms;
@@ -598,9 +603,11 @@ namespace DormRanNew
 
         private void btnStartSamplingGroup_Click(object sender, RoutedEventArgs e)
         {
+            this.canAddToLabel = true;
             Checkin checkinWindow = new Checkin();
             checkinWindow.Owner = this;
             checkinWindow.ShowDialog();
+            this.btnStartSamplingGroup.IsEnabled = false;
         }
 
         private void btnDatabaseManagement_Click(object sender, RoutedEventArgs e)
@@ -608,6 +615,40 @@ namespace DormRanNew
             Manager managerWindow = new Manager();
             managerWindow.Owner = this;
             managerWindow.ShowDialog();
+        }
+
+        private void mainWindow_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.canAddToLabel)
+                {
+                    textBlockGroupOne.Text += " ";
+                    textBlockGroupOne.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    textBlockGroupOne.TextAlignment = TextAlignment.Left;
+                    textBlockGroupTwo.Text += " ";
+                    textBlockGroupTwo.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    textBlockGroupTwo.TextAlignment = TextAlignment.Left;
+                    textBlockGroupThree.Text += " ";
+                    textBlockGroupThree.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    textBlockGroupThree.TextAlignment = TextAlignment.Left;
+                    foreach (var tmp in GroupResult.GroupResultsOne)
+                    {
+                        textBlockGroupOne.Text += tmp.officer_name + " ";
+                    }
+                    foreach (var tmp in GroupResult.GroupResultsTwo)
+                    {
+                        textBlockGroupTwo.Text += tmp.officer_name + " ";
+                    }
+                    foreach (var tmp in GroupResult.GroupResultsThree)
+                    {
+                        textBlockGroupThree.Text += tmp.officer_name + " ";
+                    }
+
+                    this.canAddToLabel = false;
+                }
+            }
+            catch (Exception exp) { }
         }
     }
 }
