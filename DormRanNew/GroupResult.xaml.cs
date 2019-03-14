@@ -24,9 +24,8 @@ namespace DormRanNew
         private ObservableCollection<officer> checkedOfficers;
         private ObservableCollection<officer> GroupResultsWomen;
         private ObservableCollection<officer> GroupResultsMen;
-        private ObservableCollection<officer> GroupResultsOne;
-        private ObservableCollection<officer> GroupResultsTwo;
-        private ObservableCollection<officer> GroupResultsThree;
+        public static ObservableCollection<officer> GroupResultsOne;
+        public static ObservableCollection<officer> GroupResultsTwo;
         public GroupResult()
         {
             InitializeComponent();
@@ -38,9 +37,8 @@ namespace DormRanNew
             this.checkedOfficers = checkedOfficer;
             this.GroupResultsWomen= new ObservableCollection<officer>();
             this.GroupResultsMen = new ObservableCollection<officer>();
-            this.GroupResultsOne = new ObservableCollection<officer>();
-            this.GroupResultsTwo = new ObservableCollection<officer>();
-            this.GroupResultsThree = new ObservableCollection<officer>();
+            GroupResultsOne = new ObservableCollection<officer>();
+            GroupResultsTwo = new ObservableCollection<officer>();
             checkedOfficer_Divided();
         }
 
@@ -63,12 +61,13 @@ namespace DormRanNew
             }
             if (numberOfWomen <= (int)(numberOfPerson / 2))
             {
-               // this.GroupResultsOne = this.GroupResultsWomen;
+                GroupResultsOne = this.GroupResultsWomen;
                 this.dataGridGroupOne.ItemsSource = null;
-                this.dataGridGroupOne.ItemsSource = GroupResultsWomen;
+                this.dataGridGroupOne.ItemsSource = GroupResultsOne;
 
+                GroupResultsTwo = this.GroupResultsMen;
                 this.dataGridGroupTwo.ItemsSource = null;
-                this.dataGridGroupTwo.ItemsSource = GroupResultsMen;
+                this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
             }
             else
             {

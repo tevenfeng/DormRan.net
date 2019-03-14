@@ -34,6 +34,8 @@ namespace DormRanNew
     {
         #region 变量
 
+        private bool canAddToLabel = false;
+
         /// <summary>
         /// 数据库连接
         /// </summary>
@@ -212,6 +214,7 @@ namespace DormRanNew
         /// <param name="e"></param>
         private void btnStartSampling_Click(object sender, RoutedEventArgs e)
         {
+            this.samplingFloorLabel.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             if (this.btnSaveRecord.IsEnabled)
             {
                 this.btnSaveRecord.IsEnabled = false;
@@ -573,9 +576,13 @@ namespace DormRanNew
 
         private void btnStartSamplingGroup_Click(object sender, RoutedEventArgs e)
         {
+
+            this.canAddToLabel = true;
+            this.btnStartSampling.IsEnabled = true;
             Checkin checkinWindow = new Checkin();
             checkinWindow.Owner = this;
             checkinWindow.ShowDialog();
+            this.btnStartSamplingGroup.IsEnabled = false;
         }
 
         private void btnDatabaseManagement_Click(object sender, RoutedEventArgs e)
@@ -583,6 +590,33 @@ namespace DormRanNew
             Manager managerWindow = new Manager();
             managerWindow.Owner = this;
             managerWindow.ShowDialog();
+        }
+
+        private void mainWindow_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.canAddToLabel)
+                {
+                    textBlockGroupOne.Text += " ";
+                    textBlockGroupOne.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    textBlockGroupOne.TextAlignment = TextAlignment.Left;
+                    textBlockGroupTwo.Text += " ";
+                    textBlockGroupTwo.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    textBlockGroupTwo.TextAlignment = TextAlignment.Left;
+                    foreach (var tmp in GroupResult.GroupResultsOne)
+                    {
+                        textBlockGroupOne.Text += tmp.officer_name + " ";
+                    }
+                    foreach (var tmp in GroupResult.GroupResultsTwo)
+                    {
+                        textBlockGroupTwo.Text += tmp.officer_name + " ";
+                    }
+
+                    this.canAddToLabel = false;
+                }
+            }
+            catch (Exception exp) { }
         }
     }
 }

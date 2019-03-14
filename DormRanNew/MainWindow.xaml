@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DormRanNew"
         Title="学生宿舍月末卫生安全检查抽签系统" Height="800" Width="1050" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="mainWindow_Loaded" Background="White" Icon="logo.ico">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="mainWindow_Loaded" Background="White" Icon="logo.ico" Activated="mainWindow_Activated">
 
     <Grid>
         <Grid.Background>
@@ -32,22 +32,22 @@
             </Grid.RowDefinitions>
 
             <Button Name="btnDatabaseManagement" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="宋体" FontSize="40" Click="btnDatabaseManagement_Click">数据管理</Button>
+                    FontSize="40" Click="btnDatabaseManagement_Click" FontWeight="Normal">数据管理</Button>
             
             <Label Grid.Row="1" Name="samplingDormLabel"
                                 VerticalAlignment="Top" HorizontalAlignment="Center"
-                                FontSize="40" Foreground="#000000" Content="宿舍抽查" />
+                                FontSize="40" Foreground="#000000" Background="#FFFFFF" Content="宿舍抽查" />
             <Label Grid.Row="1" x:Name="samplingFloorLabel"
                                 VerticalAlignment="Center" HorizontalAlignment="Center"
                                 FontSize="30" Foreground="#000000" />
 
             <TextBlock Grid.Row="2" Name="termText"
                                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                                FontSize="35" Foreground="#000000" Margin="3,40,3,53" Text="18192学期"/>
+                                FontSize="35" Foreground="#000000" Background="#FFFFFF" Margin="3,40,3,53" Text="18192学期"/>
 
             <TextBlock Grid.Row="2" Name="checkIdText"
                                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                FontSize="30" Foreground="#000000" Margin="3,0,3,60" Text="第1次抽查"/>
+                                FontSize="30" Foreground="#000000" Background="#FFFFFF" Margin="3,0,3,60" Text="第1次抽查"/>
         </Grid>
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,24,0">
@@ -82,7 +82,7 @@
         <Button Name="btnStartSamplingGroup" Click="btnStartSamplingGroup_Click"
                 Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="宋体" FontSize="25">人员签到</Button>
         
-        <Button Name="btnStartSampling" Click="btnStartSampling_Click" 
+        <Button Name="btnStartSampling" Click="btnStartSampling_Click" IsEnabled="False"
                 Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="宋体" FontSize="25">抽选宿舍</Button>
 
         <Button Name="btnSaveRecord" Click="btnSaveRecord_Click"  IsEnabled="False"
