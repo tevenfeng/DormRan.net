@@ -604,6 +604,7 @@ namespace DormRanNew
         private void btnStartSamplingGroup_Click(object sender, RoutedEventArgs e)
         {
             this.canAddToLabel = true;
+            this.btnStartSampling.IsEnabled = true;
             Checkin checkinWindow = new Checkin();
             checkinWindow.Owner = this;
             checkinWindow.ShowDialog();

@@ -24,9 +24,9 @@ namespace DormRanNew
         private ObservableCollection<officer> checkedOfficers;
         private ObservableCollection<officer> GroupResultsWomen;
         private ObservableCollection<officer> GroupResultsMen;
-        private ObservableCollection<officer> GroupResultsOne;
-        private ObservableCollection<officer> GroupResultsTwo;
-        private ObservableCollection<officer> GroupResultsThree;
+        public static ObservableCollection<officer> GroupResultsOne = new ObservableCollection<officer>();
+        public static ObservableCollection<officer> GroupResultsTwo = new ObservableCollection<officer>();
+        public static ObservableCollection<officer> GroupResultsThree = new ObservableCollection<officer>();
         public GroupResult()
         {
             InitializeComponent();
@@ -38,9 +38,9 @@ namespace DormRanNew
             this.checkedOfficers = checkedOfficer;
             this.GroupResultsWomen= new ObservableCollection<officer>();
             this.GroupResultsMen = new ObservableCollection<officer>();
-            this.GroupResultsOne = new ObservableCollection<officer>();
-            this.GroupResultsTwo = new ObservableCollection<officer>();
-            this.GroupResultsThree = new ObservableCollection<officer>();
+            GroupResultsOne = new ObservableCollection<officer>();
+            GroupResultsTwo = new ObservableCollection<officer>();
+            GroupResultsThree = new ObservableCollection<officer>();
             checkedOfficer_Divided();
         }
 
@@ -87,7 +87,7 @@ namespace DormRanNew
             }
             if(numberOfWomen<=secondGroupMenNumber)
             {
-                this.GroupResultsOne = this.GroupResultsWomen;
+                GroupResultsOne = this.GroupResultsWomen;
             }
             else
             {
@@ -130,11 +130,11 @@ namespace DormRanNew
                 }
             }
             this.dataGridGroupOne.ItemsSource = null;
-            this.dataGridGroupOne.ItemsSource = this.GroupResultsOne;
+            this.dataGridGroupOne.ItemsSource = GroupResultsOne;
             this.dataGridGroupTwo.ItemsSource = null;
-            this.dataGridGroupTwo.ItemsSource = this.GroupResultsTwo;
+            this.dataGridGroupTwo.ItemsSource = GroupResultsTwo;
             this.dataGridGroupThree.ItemsSource = null;
-            this.dataGridGroupThree.ItemsSource = this.GroupResultsThree;
+            this.dataGridGroupThree.ItemsSource = GroupResultsThree;
         }
     }
 }

@@ -94,7 +94,7 @@
         <Button Name="btnStartSamplingGroup" Click="btnStartSamplingGroup_Click"
                 Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="宋体" FontSize="25">人员签到</Button>
         
-        <Button Name="btnStartSampling" Click="btnStartSampling_Click" 
+        <Button Name="btnStartSampling" Click="btnStartSampling_Click" IsEnabled="False"
                 Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="宋体" FontSize="25">抽选宿舍</Button>
 
         <Button Name="btnSaveRecord" Click="btnSaveRecord_Click"  IsEnabled="False"
